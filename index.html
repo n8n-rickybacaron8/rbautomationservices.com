@@ -1,0 +1,2869 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ricky Bacaron — AI Automation Specialist</title>
+  <meta name="description" content="I help businesses save time, reduce costs, and scale using AI automation workflows. Specializing in n8n, Make, Zapier, and custom AI integrations." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* =====================================================
+       CSS CUSTOM PROPERTIES — THEME SYSTEM
+    ===================================================== */
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #0f0f1a;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.08);
+      --bg-glass: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(99,102,241,0.5);
+      --text-primary: #f0f0ff;
+      --text-secondary: #9898b8;
+      --text-muted: #5a5a7a;
+      --accent: #6366f1;
+      --accent-2: #8b5cf6;
+      --accent-3: #06b6d4;
+      --glow: rgba(99,102,241,0.3);
+      --glow-2: rgba(139,92,246,0.2);
+      --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+      --gradient-card: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.05));
+      --shadow-card: 0 8px 32px rgba(0,0,0,0.4);
+      --nav-bg: rgba(10,10,15,0.85);
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8f8ff;
+      --bg-secondary: #eff0ff;
+      --bg-card: rgba(99,102,241,0.04);
+      --bg-card-hover: rgba(99,102,241,0.08);
+      --bg-glass: rgba(255,255,255,0.7);
+      --border: rgba(99,102,241,0.12);
+      --border-hover: rgba(99,102,241,0.4);
+      --text-primary: #0a0a1a;
+      --text-secondary: #44447a;
+      --text-muted: #8888aa;
+      --glow: rgba(99,102,241,0.15);
+      --glow-2: rgba(139,92,246,0.1);
+      --shadow-card: 0 8px 32px rgba(99,102,241,0.1);
+      --nav-bg: rgba(248,248,255,0.9);
+    }
+
+    /* =====================================================
+       RESET & BASE
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    ::selection { background: rgba(99,102,241,0.3); color: var(--text-primary); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* =====================================================
+       UTILITY CLASSES
+    ===================================================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 120px 0; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.25);
+      color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 17px; color: var(--text-secondary);
+      max-width: 560px; line-height: 1.7;
+    }
+    .gradient-text {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      text-decoration: none; border: none; outline: none;
+      transition: all var(--transition); white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary {
+      background: var(--gradient-hero); color: #fff;
+      box-shadow: 0 0 32px var(--glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 40px rgba(99,102,241,0.5);
+    }
+    .btn-ghost {
+      background: var(--bg-glass); color: var(--text-primary);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .btn-ghost:hover {
+      background: var(--bg-card-hover); border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .btn-sm { padding: 10px 20px; font-size: 13px; border-radius: 10px; }
+
+    /* Scroll animation */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* =====================================================
+       BACKGROUND EFFECTS
+    ===================================================== */
+    .bg-orbs {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.12;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--accent-2); top: 40%; right: -150px; animation-delay: -7s; }
+    .orb-3 { width: 300px; height: 300px; background: var(--accent-3); bottom: -100px; left: 30%; animation-delay: -14s; }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 30px) scale(0.95); }
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+      text-decoration: none; color: var(--text-primary);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--gradient-hero);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; box-shadow: 0 0 20px var(--glow);
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 14px; font-weight: 500; padding: 8px 16px;
+      border-radius: 8px; transition: all var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-card); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-socials { display: flex; align-items: center; gap: 8px; }
+    .nav-social-link {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); text-decoration: none; font-size: 14px;
+      transition: all var(--transition);
+    }
+    .nav-social-link:hover {
+      background: var(--bg-card-hover); color: var(--accent);
+      border-color: var(--border-hover); transform: translateY(-2px);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      width: 52px; height: 28px; border-radius: 100px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      cursor: pointer; position: relative; transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .theme-toggle::before {
+      content: ''; position: absolute;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--gradient-hero);
+      top: 3px; left: 3px;
+      transition: transform var(--transition);
+      box-shadow: 0 0 10px var(--glow);
+    }
+    [data-theme="light"] .theme-toggle::before { transform: translateX(24px); }
+
+    /* Mobile menu */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-primary); border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-socials { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 72px; left: 0; right: 0;
+        background: var(--nav-bg); backdrop-filter: blur(20px);
+        padding: 16px; border-bottom: 1px solid var(--border);
+        gap: 4px;
+      }
+    }
+
+    /* =====================================================
+       HERO SECTION
+    ===================================================== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; padding-top: 72px; overflow: hidden;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; width: 100%;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.25);
+      color: var(--accent); font-size: 13px; font-weight: 600;
+      padding: 8px 16px; border-radius: 100px; margin-bottom: 28px;
+      animation: pulse-border 3s ease infinite;
+    }
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(99,102,241,0); }
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; animation: blink 1.5s ease infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -1px; margin-bottom: 24px;
+    }
+    .hero-subtitle {
+      font-size: 18px; color: var(--text-secondary);
+      line-height: 1.7; margin-bottom: 40px; max-width: 480px;
+    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+    .hero-stats {
+      display: flex; gap: 40px; flex-wrap: wrap;
+      padding-top: 32px; border-top: 1px solid var(--border);
+    }
+    .hero-stat { }
+    .hero-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px; font-weight: 700; color: var(--text-primary);
+      background: var(--gradient-hero);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-stat-label { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    /* Hero 3D Canvas */
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+    #hero-canvas {
+      width: 100%; max-width: 520px; height: 520px;
+      border-radius: 24px; display: block;
+    }
+    .hero-visual-card {
+      position: absolute; background: var(--bg-glass);
+      backdrop-filter: blur(20px); border: 1px solid var(--border);
+      border-radius: 16px; padding: 16px 20px;
+      animation: floatCard 6s ease-in-out infinite;
+    }
+    .hero-visual-card.card-1 { bottom: 40px; left: -20px; animation-delay: 0s; }
+    .hero-visual-card.card-2 { top: 40px; right: -20px; animation-delay: -3s; }
+    @keyframes floatCard {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .card-1-inner { display: flex; align-items: center; gap: 12px; }
+    .card-1-icon { width: 36px; height: 36px; background: var(--gradient-hero); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .card-1-text { }
+    .card-1-text strong { display: block; font-size: 13px; color: var(--text-primary); }
+    .card-1-text span { font-size: 11px; color: #22c55e; }
+    .card-2-inner { display: flex; align-items: center; gap: 12px; }
+    .card-2-num { font-family: 'Space Grotesk',sans-serif; font-size: 24px; font-weight: 700; background: var(--gradient-hero); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .card-2-label { font-size: 12px; color: var(--text-secondary); }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-subtitle, .hero-cta { margin-left: auto; margin-right: auto; }
+      .hero-cta { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { margin-top: 40px; }
+      #hero-canvas { height: 380px; }
+    }
+
+    /* =====================================================
+       SERVICES SECTION
+    ===================================================== */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; margin-top: 60px;
+    }
+    .service-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      transition: all var(--transition); cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gradient-card); opacity: 0;
+      transition: opacity var(--transition); border-radius: 20px;
+    }
+    .service-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card), 0 0 40px var(--glow);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: var(--gradient-hero);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+      box-shadow: 0 8px 24px var(--glow);
+      position: relative; z-index: 1;
+    }
+    .service-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 600; margin-bottom: 12px;
+      color: var(--text-primary); position: relative; z-index: 1;
+    }
+    .service-desc {
+      font-size: 14px; color: var(--text-secondary);
+      line-height: 1.7; position: relative; z-index: 1;
+    }
+    .service-arrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px; color: var(--accent); font-size: 13px;
+      font-weight: 600; text-decoration: none;
+      position: relative; z-index: 1;
+      transition: gap var(--transition);
+    }
+    .service-card:hover .service-arrow { gap: 12px; }
+
+    /* =====================================================
+       TOOLS SECTION
+    ===================================================== */
+    .tools-section { padding: 80px 0; background: var(--bg-secondary); }
+    .tools-label {
+      text-align: center; font-size: 13px; font-weight: 600;
+      color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .tools-track-wrapper { overflow: hidden; position: relative; }
+    .tools-track-wrapper::before,
+    .tools-track-wrapper::after {
+      content: ''; position: absolute; top: 0; bottom: 0;
+      width: 120px; z-index: 2;
+    }
+    .tools-track-wrapper::before { left: 0; background: linear-gradient(to right, var(--bg-secondary), transparent); }
+    .tools-track-wrapper::after { right: 0; background: linear-gradient(to left, var(--bg-secondary), transparent); }
+    .tools-track {
+      display: flex; gap: 20px; animation: scroll-left 30s linear infinite;
+      width: max-content;
+    }
+    .tools-track:hover { animation-play-state: paused; }
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .tool-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 12px 24px;
+      white-space: nowrap; transition: all var(--transition);
+      cursor: default;
+    }
+    .tool-pill:hover {
+      border-color: var(--border-hover); background: var(--bg-card-hover);
+      transform: translateY(-2px); box-shadow: 0 8px 24px var(--glow);
+    }
+    .tool-pill img { width: 24px; height: 24px; object-fit: contain; }
+    .tool-pill span { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+    /* =====================================================
+       PROJECTS SECTION
+    ===================================================== */
+    .projects-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px; margin-bottom: 60px;
+    }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 24px; overflow: hidden; transition: all var(--transition);
+    }
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card), 0 0 40px var(--glow);
+    }
+    .project-thumb {
+      height: 200px; position: relative; overflow: hidden;
+      background: var(--bg-secondary);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .project-thumb-bg {
+      position: absolute; inset: 0;
+      background: var(--gradient-card); opacity: 0.6;
+    }
+    .project-thumb-icon {
+      font-size: 64px; position: relative; z-index: 1;
+      animation: floatIcon 4s ease-in-out infinite;
+    }
+    @keyframes floatIcon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .project-thumb-tag {
+      position: absolute; top: 16px; right: 16px; z-index: 2;
+      background: var(--gradient-hero); color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    }
+    .project-body { padding: 28px; }
+    .project-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700; margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .project-meta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .project-meta-item { display: flex; gap: 8px; align-items: flex-start; }
+    .project-meta-label {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      min-width: 64px; padding-top: 2px;
+    }
+    .project-meta-value { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .project-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .project-tool-tag {
+      font-size: 11px; font-weight: 600; padding: 4px 10px;
+      background: rgba(99,102,241,0.1); color: var(--accent);
+      border: 1px solid rgba(99,102,241,0.2); border-radius: 6px;
+    }
+    .project-footer { padding-top: 16px; border-top: 1px solid var(--border); }
+
+    /* =====================================================
+       WORKFLOW VISUAL SECTION
+    ===================================================== */
+    .workflow-section { background: var(--bg-secondary); }
+    .workflow-inner {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 80px; align-items: center;
+    }
+    .workflow-canvas {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 32px; position: relative; overflow: hidden;
+    }
+    .wf-nodes {
+      display: flex; flex-direction: column; gap: 16px;
+      position: relative;
+    }
+    .wf-node {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg-glass); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 18px;
+      transition: all var(--transition); cursor: default;
+      animation: nodeIn 0.5s ease forwards; opacity: 0;
+    }
+    .wf-node:nth-child(1){animation-delay:0.1s}
+    .wf-node:nth-child(2){animation-delay:0.2s}
+    .wf-node:nth-child(3){animation-delay:0.3s}
+    .wf-node:nth-child(4){animation-delay:0.4s}
+    .wf-node:nth-child(5){animation-delay:0.5s}
+    @keyframes nodeIn {
+      from{opacity:0;transform:translateX(-20px)}
+      to{opacity:1;transform:translateX(0)}
+    }
+    .wf-node:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+    .wf-node.active { border-color: var(--accent); box-shadow: 0 0 20px var(--glow); }
+    .wf-node-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .wf-node-info { flex: 1; }
+    .wf-node-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .wf-node-type { font-size: 11px; color: var(--text-muted); }
+    .wf-connector {
+      display: flex; align-items: center; justify-content: center;
+      height: 24px; position: relative;
+    }
+    .wf-connector-line {
+      width: 2px; height: 100%; background: var(--border);
+      position: relative; overflow: hidden;
+    }
+    .wf-connector-line::after {
+      content: ''; position: absolute; width: 100%; height: 40%;
+      background: var(--gradient-hero);
+      animation: flowDown 2s linear infinite;
+    }
+    @keyframes flowDown { from{top:-40%} to{top:140%} }
+    .wf-node-status {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+    }
+    .wf-node-status.pending { background: var(--accent); animation: blink 1.5s ease infinite; }
+
+    /* =====================================================
+       ABOUT SECTION
+    ===================================================== */
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 80px; align-items: center;
+    }
+    .about-image-wrap {
+      position: relative; display: flex; justify-content: center;
+    }
+    .about-image-ring {
+      width: 320px; height: 320px; border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      animation: spin-slow 20s linear infinite;
+    }
+    @keyframes spin-slow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    .about-image-ring::before {
+      content: ''; position: absolute; inset: 8px;
+      border-radius: 50%; border: 1px solid rgba(99,102,241,0.2);
+    }
+    .about-image-dot {
+      position: absolute; width: 12px; height: 12px;
+      border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 20px var(--glow);
+    }
+    .about-image-dot:nth-child(1) { top: 0; left: 50%; transform: translate(-50%,-50%); }
+    .about-image-dot:nth-child(2) { bottom: 0; left: 50%; transform: translate(-50%,50%); }
+    .about-image-dot:nth-child(3) { left: 0; top: 50%; transform: translate(-50%,-50%); background: var(--accent-3); }
+    .about-photo {
+      width: 260px; height: 260px; border-radius: 50%;
+      object-fit: cover; background: var(--bg-secondary);
+      border: 3px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 100px; animation: spin-slow 20s linear infinite reverse;
+      flex-shrink: 0; box-shadow: 0 0 60px var(--glow);
+      overflow: hidden;
+    }
+    .about-photo-inner {
+      width: 260px; height: 260px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(99,102,241,0.2) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 100px;
+    }
+    .about-content { }
+    .about-highlights { display: flex; gap: 20px; margin: 28px 0; flex-wrap: wrap; }
+    .about-highlight {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 20px; flex: 1; min-width: 120px;
+    }
+    .about-highlight-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700;
+      background: var(--gradient-hero); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .about-highlight-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .about-text { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+    .about-skills { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+    .skill-tag {
+      background: rgba(99,102,241,0.1); color: var(--accent);
+      border: 1px solid rgba(99,102,241,0.2); border-radius: 8px;
+      padding: 6px 14px; font-size: 13px; font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .about-inner, .workflow-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-image-wrap { display: none; }
+    }
+
+    /* =====================================================
+       TESTIMONIALS
+    ===================================================== */
+    .testimonials-slider { position: relative; overflow: hidden; margin-top: 60px; }
+    .testimonials-track {
+      display: flex; gap: 0;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+    .testimonial-card {
+      min-width: 50%; width: 50%;
+      box-sizing: border-box;
+      padding: 36px 28px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 24px;
+      position: relative; flex-shrink: 0;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      margin: 0 12px;
+    }
+    .testimonial-card:hover { border-color: var(--border-hover); }
+    .testimonial-quote {
+      font-size: 40px; color: var(--accent); line-height: 1;
+      font-family: Georgia, serif; margin-bottom: 16px;
+    }
+    .testimonial-text {
+      font-size: 15px; color: var(--text-secondary);
+      line-height: 1.8; margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gradient-hero);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-weight: 600; font-size: 15px; color: var(--text-primary); }
+    .testimonial-role { font-size: 12px; color: var(--text-muted); }
+    .testimonial-stars { color: #f59e0b; font-size: 13px; margin-bottom: 4px; }
+    .testimonials-nav {
+      display: flex; justify-content: center; gap: 12px; margin-top: 32px;
+    }
+    .tNav-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-primary); cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .tNav-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tNav-dots { display: flex; gap: 8px; align-items: center; }
+    .tNav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); cursor: pointer; transition: all var(--transition);
+    }
+    .tNav-dot.active { width: 24px; border-radius: 4px; background: var(--accent); }
+
+    @media (max-width: 768px) {
+      .testimonial-card { min-width: calc(100% - 24px); width: calc(100% - 24px); }
+    }
+
+    /* =====================================================
+       CONTACT SECTION
+    ===================================================== */
+    .contact-section { background: var(--bg-secondary); }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .contact-left { }
+    .contact-info-items { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+    .contact-info-item {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 20px;
+      transition: all var(--transition);
+    }
+    .contact-info-item:hover { border-color: var(--border-hover); transform: translateX(6px); }
+    .contact-info-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--gradient-hero); display: flex;
+      align-items: center; justify-content: center; font-size: 18px;
+      flex-shrink: 0; box-shadow: 0 4px 16px var(--glow);
+    }
+    .contact-info-text strong { display: block; font-size: 14px; color: var(--text-primary); }
+    .contact-info-text span { font-size: 13px; color: var(--text-secondary); }
+    .contact-social-links { display: flex; gap: 12px; margin-top: 32px; }
+    .contact-social {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--text-secondary); text-decoration: none;
+      transition: all var(--transition);
+    }
+    .contact-social:hover {
+      background: var(--gradient-hero); color: #fff;
+      border-color: transparent; transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--glow);
+    }
+
+    /* Contact Form */
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+    .form-input, .form-textarea, .form-select {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+      color: var(--text-primary); font-size: 14px; font-family: 'Inter', sans-serif;
+      transition: all var(--transition); outline: none; width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow);
+    }
+    .form-textarea { resize: vertical; min-height: 130px; }
+    .form-select option { background: var(--bg-secondary); }
+    .form-submit {
+      width: 100%; padding: 16px; font-size: 15px; font-weight: 700;
+      border-radius: 14px; cursor: pointer; border: none;
+      background: var(--gradient-hero); color: #fff;
+      transition: all var(--transition); font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99,102,241,0.5); }
+
+    @media (max-width: 768px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    .footer {
+      background: var(--bg-primary); border-top: 1px solid var(--border);
+      padding: 60px 0 32px;
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px; margin-bottom: 48px;
+    }
+    .footer-brand p { font-size: 14px; color: var(--text-muted); margin-top: 16px; max-width: 280px; line-height: 1.7; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 32px; border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom p { font-size: 13px; color: var(--text-muted); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-bottom-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* =====================================================
+       MISC / TOAST
+    ===================================================== */
+    .toast {
+      position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+      background: var(--bg-glass); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px 24px; display: flex; align-items: center; gap: 12px;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: var(--shadow-card);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-icon { font-size: 20px; }
+    .toast-text { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+
+    /* =====================================================
+       WORKFLOW MODALS
+    ===================================================== */
+    .wf-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px); z-index: 2000;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .wf-modal-overlay.active { opacity: 1; pointer-events: all; }
+
+    .wf-modal {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -48%) scale(0.96);
+      width: min(96vw, 1100px); max-height: 90vh;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 24px; z-index: 2100; overflow: hidden;
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.15);
+    }
+    .wf-modal.active {
+      opacity: 1; pointer-events: all;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .wf-modal-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 20px; padding: 28px 32px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card); flex-shrink: 0;
+    }
+    .wf-modal-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent);
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2);
+      padding: 4px 12px; border-radius: 100px; display: inline-block;
+      margin-bottom: 10px;
+    }
+    .wf-modal-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(16px, 2.5vw, 22px); font-weight: 700;
+      color: var(--text-primary); line-height: 1.3; margin: 0;
+    }
+    .wf-modal-close {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-secondary); cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .wf-modal-close:hover { background: rgba(239,68,68,0.1); color: #ef4444; border-color: rgba(239,68,68,0.3); }
+
+    .wf-modal-body {
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 0; overflow-y: auto; flex: 1;
+    }
+    .wf-modal-left {
+      padding: 28px 32px; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .wf-modal-right { padding: 28px 32px; overflow-y: auto; }
+
+    .wf-modal-section h4 {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
+    }
+    .wf-modal-section p {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.7;
+    }
+    .wf-modal-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .wf-modal-impact {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .impact-item {
+      flex: 1; min-width: 80px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px; text-align: center;
+    }
+    .impact-num {
+      display: block; font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+      background: var(--gradient-hero); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .impact-label { display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    .wf-modal-badge {
+      margin-top: auto; display: flex; align-items: center; gap: 8px;
+      background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15);
+      border-radius: 10px; padding: 10px 14px;
+      font-size: 12px; color: var(--text-muted); font-weight: 500;
+    }
+    .wf-modal-badge i { color: var(--accent); }
+
+    /* Workflow canvas inside modal */
+    .wf-canvas-label {
+      font-size: 11px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+    }
+    .wf-canvas {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; overflow-x: auto;
+    }
+    .wf-flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .wf-flow-node {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-glass); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 16px; width: 100%;
+      transition: all 0.2s ease;
+    }
+    .wf-flow-node.trigger { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.05); }
+    .wf-flow-node.ai { border-color: rgba(99,102,241,0.4); background: rgba(99,102,241,0.05); }
+    .wf-flow-node.ai.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(99,102,241,0.2); }
+    .wf-flow-node.process { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.04); }
+    .wf-flow-node.output { border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.05); }
+    .wf-flow-node.tool { border-color: rgba(139,92,246,0.4); background: rgba(139,92,246,0.05); }
+    .wfn-icon { font-size: 22px; flex-shrink: 0; }
+    .wfn-label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .wfn-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    .wf-flow-arrow {
+      width: 2px; height: 24px; background: var(--border);
+      position: relative; margin: 2px 0; overflow: hidden; flex-shrink: 0;
+    }
+    .wf-flow-arrow::after {
+      content: ''; position: absolute; width: 100%; height: 40%;
+      background: var(--gradient-hero);
+      animation: flowDown 1.8s linear infinite;
+    }
+
+    .wf-flow-branch {
+      display: flex; gap: 10px; width: 100%; margin: 4px 0;
+    }
+    .wf-flow-branch-item { flex: 1; }
+    .wf-flow-branch-item .wf-flow-node { width: 100%; }
+
+    @media (max-width: 768px) {
+      .wf-modal-body { grid-template-columns: 1fr; }
+      .wf-modal-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .wf-modal-header { padding: 20px; }
+      .wf-modal-left, .wf-modal-right { padding: 20px; }
+    }
+
+    /* Cursor pointer on project cards */
+    .project-card[data-modal] { cursor: pointer; }
+
+    /* Section divider */
+    .divider {
+      height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* Highlight color on hover */
+    .section-title span { position: relative; }
+    .section-title span::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: var(--gradient-hero);
+      border-radius: 2px; transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+    .section-title:hover span::after { transform: scaleX(1); }
+  </style>
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✅</span>
+    <span class="toast-text">Message sent! I'll get back to you soon.</span>
+  </div>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <div class="nav-logo-icon">⚡</div>
+        <span>Ricky<span class="gradient-text">AI</span></span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="nav-socials">
+          <a href="https://www.linkedin.com/in/ricky-bacaron/" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.facebook.com/rbacaron08" target="_blank" rel="noopener" class="nav-social-link" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://github.com/n8n-rickybacaron8" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://t.me/+639811893735" target="_blank" rel="noopener" class="nav-social-link" aria-label="Telegram">
+            <i class="fab fa-telegram-plane"></i>
+          </a>
+          <a href="https://www.instagram.com/_rickybacaron" target="_blank" rel="noopener" class="nav-social-link" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+        <a href="#contact" class="btn btn-primary btn-sm">Book a Call</a>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero section" id="home">
+    <div class="container">
+      <div class="hero-inner">
+        <!-- Left content -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <div class="hero-badge-dot"></div>
+            Available for new projects
+          </div>
+          <h1 class="hero-title">
+            I Automate Business
+            <span class="gradient-text">Workflows</span>
+            Using AI
+          </h1>
+          <p class="hero-subtitle">
+            Help businesses save time, reduce costs, and scale smarter using
+            intelligent automation — from simple integrations to full AI-powered pipelines.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fas fa-layer-group"></i> View Portfolio
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+              <i class="fas fa-calendar-alt"></i> Book Free Consultation
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num">20+</div>
+              <div class="hero-stat-label">Workflows Built</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">1yr</div>
+              <div class="hero-stat-label">AI Automation</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">100%</div>
+              <div class="hero-stat-label">Client Satisfaction</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3D Visual -->
+        <div class="hero-visual">
+          <canvas id="hero-canvas"></canvas>
+
+          <div class="hero-visual-card card-1">
+            <div class="card-1-inner">
+              <div class="card-1-icon">🤖</div>
+              <div class="card-1-text">
+                <strong>AI Workflow Active</strong>
+                <span>● Processing 247 tasks</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual-card card-2">
+            <div class="card-2-inner">
+              <div>
+                <div class="card-2-num">40h</div>
+                <div class="card-2-label">Saved per week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== TOOLS / MARQUEE ===================== -->
+  <section class="tools-section">
+    <div class="container">
+      <p class="tools-label">Tools & Platforms I Work With</p>
+    </div>
+    <div class="tools-track-wrapper">
+      <div class="tools-track" id="tools-track">
+        <!-- Will be populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 16px;">
+        <span class="section-tag"><i class="fas fa-bolt"></i> What I Do</span>
+      </div>
+      <h2 class="section-title" style="text-align:center">
+        Services That <span class="gradient-text">Scale Your Business</span>
+      </h2>
+      <p class="section-subtitle" style="text-align:center; margin: 0 auto 0;">
+        From chatbots to full workflow automation — I build systems that work while you sleep.
+      </p>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">🤖</div>
+          <h3 class="service-title">AI Chatbot Automation</h3>
+          <p class="service-desc">Deploy intelligent chatbots powered by GPT-4 and Claude that handle customer queries, qualify leads, and book appointments 24/7 without human intervention.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.1s">
+          <div class="service-icon">🛒</div>
+          <h3 class="service-title">eCommerce Automation</h3>
+          <p class="service-desc">Automate order processing, inventory sync, customer follow-ups, abandoned cart recovery, and fulfillment workflows across Shopify, WooCommerce, and more.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.2s">
+          <div class="service-icon">📧</div>
+          <h3 class="service-title">CRM & Email Automation</h3>
+          <p class="service-desc">Build automated nurture sequences, CRM pipelines, and personalized email campaigns that convert leads into clients on autopilot.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.3s">
+          <div class="service-icon">🔗</div>
+          <h3 class="service-title">API Integrations</h3>
+          <p class="service-desc">Connect any two platforms with custom API integrations. From Stripe to Notion, HubSpot to Google Sheets — if it has an API, I can wire it up.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.4s">
+          <div class="service-icon">⚙️</div>
+          <h3 class="service-title">Workflow Automation (n8n)</h3>
+          <p class="service-desc">Design powerful multi-step automation workflows using n8n, Make, and Zapier. Handle complex business logic, data routing, and error handling at scale.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.5s">
+          <div class="service-icon">🎯</div>
+          <h3 class="service-title">Lead Generation Systems</h3>
+          <p class="service-desc">Build automated lead capture, scoring, enrichment, and follow-up systems that fill your pipeline with qualified prospects without manual effort.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="projects-header">
+        <div>
+          <span class="section-tag"><i class="fas fa-folder-open"></i> Portfolio</span>
+          <h2 class="section-title">Sample <span class="gradient-text">Projects</span></h2>
+          <p class="section-subtitle">Real-world automation workflows built for businesses like yours.</p>
+        </div>
+        <a href="#contact" class="btn btn-ghost">
+          <i class="fas fa-plus"></i> Start a Project
+        </a>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT 1: Multi AI Agent -->
+        <div class="project-card reveal" data-modal="modal-1">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(99,102,241,0.18),rgba(139,92,246,0.1));"></div>
+            <div class="project-thumb-icon">🤖</div>
+            <div class="project-thumb-tag">Multi-Agent AI</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Intelligent Multi-Agent AI Assistant via Telegram</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Teams wasted hours daily managing emails, scheduling meetings, and looking up information manually across multiple apps.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Built a Telegram-powered multi-agent AI that routes tasks to specialized sub-agents — handling Gmail, Google Calendar, and Supabase database queries, all from a single chat interface.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Telegram</span>
+              <span class="project-tool-tag">OpenAI GPT-4o</span>
+              <span class="project-tool-tag">Gmail</span>
+              <span class="project-tool-tag">Google Calendar</span>
+              <span class="project-tool-tag">Supabase</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-1">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 2: Invoice Processing -->
+        <div class="project-card reveal" style="transition-delay:0.1s" data-modal="modal-2">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(34,197,94,0.15),rgba(6,182,212,0.08));"></div>
+            <div class="project-thumb-icon">🧾</div>
+            <div class="project-thumb-tag">Finance AI</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">AI-Powered Invoice Processing & Data Extraction</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Finance teams spent hours manually reading invoices, extracting data, and entering it into spreadsheets — prone to costly human errors.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Automated the full invoice workflow: Google Drive detects new PDFs, GPT-4o extracts all key fields, data is logged to Google Sheets, and a summary email is sent — in under 30 seconds.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Google Drive</span>
+              <span class="project-tool-tag">OpenAI GPT-4o</span>
+              <span class="project-tool-tag">Google Sheets</span>
+              <span class="project-tool-tag">Gmail</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-2">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 3: Sales Lead Automation -->
+        <div class="project-card reveal" style="transition-delay:0.2s" data-modal="modal-3">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(239,68,68,0.08));"></div>
+            <div class="project-thumb-icon">🎯</div>
+            <div class="project-thumb-tag">Sales Automation</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">AI-Powered Sales Lead Qualification & Automated Outreach</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Sales teams wasted hours manually qualifying leads and writing personalized outreach emails — slow response times caused prospects to go cold.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Built an end-to-end pipeline: form captures leads, AI qualifies and scores them, generates personalized email drafts, routes for human approval, and sends — all automatically.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">OpenAI GPT-4o</span>
+              <span class="project-tool-tag">Google Sheets</span>
+              <span class="project-tool-tag">Gmail</span>
+              <span class="project-tool-tag">n8n Forms</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-3">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 4: Supabase AI Search -->
+        <div class="project-card reveal" style="transition-delay:0.3s" data-modal="modal-4">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(6,182,212,0.15),rgba(99,102,241,0.08));"></div>
+            <div class="project-thumb-icon">🔍</div>
+            <div class="project-thumb-tag">AI Search</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">AI Document Search Engine with Semantic Retrieval</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Teams buried in large document libraries couldn't quickly find specific information — keyword search returned irrelevant results.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Built a two-pipeline AI system: one ingests documents from Google Drive into a Supabase vector store; the other lets users ask questions in plain language and returns source-grounded AI answers.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Supabase</span>
+              <span class="project-tool-tag">OpenAI Embeddings</span>
+              <span class="project-tool-tag">GPT-4o</span>
+              <span class="project-tool-tag">Google Drive</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-4">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 5: Shopify Order Automation -->
+        <div class="project-card reveal" style="transition-delay:0.1s" data-modal="modal-5">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(96,165,250,0.15),rgba(99,102,241,0.08));"></div>
+            <div class="project-thumb-icon">🛍️</div>
+            <div class="project-thumb-tag">eCommerce</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Shopify Order Fulfillment Automation</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Manual order processing took 3+ hours daily — warehouse delays, incorrect inventory counts, and missed customer emails caused poor reviews.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Built an n8n workflow triggered on every new Shopify order: auto-updates inventory, notifies the warehouse, sends branded confirmation emails, and logs everything to Google Sheets.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Shopify API</span>
+              <span class="project-tool-tag">Gmail</span>
+              <span class="project-tool-tag">Google Sheets</span>
+              <span class="project-tool-tag">Slack</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-5">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 6: AI Customer Support Bot -->
+        <div class="project-card reveal" style="transition-delay:0.2s" data-modal="modal-6">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(6,182,212,0.08));"></div>
+            <div class="project-thumb-icon">💬</div>
+            <div class="project-thumb-tag">AI Support</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">AI Customer Support Bot — Automated Ticket Resolution</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Support team overwhelmed with repetitive tickets — slow responses damaged CSAT scores and team morale.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Deployed an AI bot that monitors Gmail, classifies tickets, searches a knowledge base, auto-responds to 80% of issues, and escalates complex cases to human agents.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">OpenAI GPT-4o</span>
+              <span class="project-tool-tag">Gmail</span>
+              <span class="project-tool-tag">Supabase</span>
+              <span class="project-tool-tag">Google Sheets</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-6">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 7: Lead Generation System -->
+        <div class="project-card reveal" style="transition-delay:0.3s" data-modal="modal-7">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(6,182,212,0.15),rgba(99,102,241,0.08));"></div>
+            <div class="project-thumb-icon">📡</div>
+            <div class="project-thumb-tag">Lead Gen</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Automated Lead Generation & Enrichment Pipeline</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Sales team spending 5+ hours daily on manual prospecting, data enrichment, and cold outreach with inconsistent results.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Built a daily pipeline that scrapes leads from Apollo.io, enriches data, scores fit with AI, pushes qualified leads to HubSpot, and sends personalized outreach emails automatically.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Apollo.io</span>
+              <span class="project-tool-tag">HubSpot</span>
+              <span class="project-tool-tag">OpenAI GPT-4o</span>
+              <span class="project-tool-tag">Gmail</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-7">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 8: Appointment Booking -->
+        <div class="project-card reveal" style="transition-delay:0.4s" data-modal="modal-8">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(34,197,94,0.15),rgba(99,102,241,0.08));"></div>
+            <div class="project-thumb-icon">📅</div>
+            <div class="project-thumb-tag">Scheduling</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Smart Appointment Booking & Reminder Automation</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Back-and-forth scheduling emails, forgotten Zoom links, and no-shows were costing valuable sales calls and team hours.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Automated the full booking lifecycle: Calendly triggers instant Zoom creation, CRM update, confirmation email, prep materials 24h before, and multi-stage reminders — all hands-free.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Calendly</span>
+              <span class="project-tool-tag">Zoom API</span>
+              <span class="project-tool-tag">HubSpot</span>
+              <span class="project-tool-tag">Gmail</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-8">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WORKFLOW MODALS ===================== -->
+
+  <!-- Modal Overlay -->
+  <div class="wf-modal-overlay" id="wf-modal-overlay"></div>
+
+  <!-- Modal 1: Multi AI Agent -->
+  <div class="wf-modal" id="modal-1">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">Multi-Agent AI · n8n</div>
+        <h2 class="wf-modal-title">Intelligent Multi-Agent AI Assistant via Telegram</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-1"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>A sophisticated Telegram-powered multi-agent system where the master AI understands user intent and delegates tasks to specialized sub-agents for email, calendar, and knowledge base retrieval — all in one conversation.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">3+</span><span class="impact-label">Hours saved daily</span></div>
+            <div class="impact-item"><span class="impact-num">24/7</span><span class="impact-label">Always available</span></div>
+            <div class="impact-item"><span class="impact-num">4</span><span class="impact-label">Agents in one bot</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Telegram</span><span class="project-tool-tag">OpenAI GPT-4o</span><span class="project-tool-tag">OpenAI Whisper</span><span class="project-tool-tag">Gmail</span><span class="project-tool-tag">Google Calendar</span><span class="project-tool-tag">Supabase</span><span class="project-tool-tag">Google Drive</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">💬</div><div class="wfn-label">Telegram Trigger</div><div class="wfn-sub">Text or Voice</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai"><div class="wfn-icon">🎙️</div><div class="wfn-label">Voice Transcription</div><div class="wfn-sub">OpenAI Whisper</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai active"><div class="wfn-icon">🧠</div><div class="wfn-label">Master AI Agent</div><div class="wfn-sub">GPT-4o · Routes tasks</div></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">📧</div><div class="wfn-label">Email Agent</div><div class="wfn-sub">Gmail Read/Write</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">📅</div><div class="wfn-label">Calendar Agent</div><div class="wfn-sub">Google Calendar</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">🗄️</div><div class="wfn-label">Database Agent</div><div class="wfn-sub">Supabase Vector</div></div>
+              </div>
+            </div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📲</div><div class="wfn-label">Telegram Reply</div><div class="wfn-sub">Sends result to user</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Invoice Processing -->
+  <div class="wf-modal" id="modal-2">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">Finance AI · n8n</div>
+        <h2 class="wf-modal-title">AI-Powered Invoice Processing & Data Extraction</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-2"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>Fully automated invoice processing pipeline. When a PDF is uploaded to Google Drive, AI reads and extracts all key fields, logs the data to Google Sheets, and dispatches a summary email — zero manual effort required.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">30s</span><span class="impact-label">Per invoice</span></div>
+            <div class="impact-item"><span class="impact-num">~0%</span><span class="impact-label">Error rate</span></div>
+            <div class="impact-item"><span class="impact-num">5hrs</span><span class="impact-label">Saved weekly</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Google Drive</span><span class="project-tool-tag">OpenAI GPT-4o</span><span class="project-tool-tag">Google Sheets</span><span class="project-tool-tag">Gmail</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">📁</div><div class="wfn-label">Google Drive Trigger</div><div class="wfn-sub">New PDF uploaded</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">⬇️</div><div class="wfn-label">Download File</div><div class="wfn-sub">Retrieve PDF content</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">📄</div><div class="wfn-label">Extract from File</div><div class="wfn-sub">Parse PDF text</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai active"><div class="wfn-icon">🧠</div><div class="wfn-label">AI Info Extractor</div><div class="wfn-sub">GPT-4o · Vendor, Amount, Date</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node output"><div class="wfn-icon">📊</div><div class="wfn-label">Google Sheets</div><div class="wfn-sub">Append row</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node output"><div class="wfn-icon">📧</div><div class="wfn-label">Email Summary</div><div class="wfn-sub">Gmail notification</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Sales Lead Automation -->
+  <div class="wf-modal" id="modal-3">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">Sales Automation · n8n</div>
+        <h2 class="wf-modal-title">AI-Powered Sales Lead Qualification & Automated Outreach</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-3"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>End-to-end sales pipeline automation. Leads submit a form, the AI qualifies them, generates a personalized email, routes for human approval, and sends — cutting response time from hours to minutes.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">5min</span><span class="impact-label">Response time</span></div>
+            <div class="impact-item"><span class="impact-num">100%</span><span class="impact-label">Leads captured</span></div>
+            <div class="impact-item"><span class="impact-num">AI</span><span class="impact-label">Personalization</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">n8n Forms</span><span class="project-tool-tag">Google Sheets</span><span class="project-tool-tag">OpenAI GPT-4o</span><span class="project-tool-tag">Gmail</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">📝</div><div class="wfn-label">Lead Form Submission</div><div class="wfn-sub">Name, Budget, Intent</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">📊</div><div class="wfn-label">Log to Sheets</div><div class="wfn-sub">CRM spreadsheet</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai active"><div class="wfn-icon">🧠</div><div class="wfn-label">AI Sales Agent</div><div class="wfn-sub">Qualify · Score · Draft email</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai"><div class="wfn-icon">🏷️</div><div class="wfn-label">Text Classifier</div><div class="wfn-sub">Categorize intent</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">👤</div><div class="wfn-label">Human Approval</div><div class="wfn-sub">Review before send</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📧</div><div class="wfn-label">Send Lead Email</div><div class="wfn-sub">Personalized outreach</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Supabase AI Search -->
+  <div class="wf-modal" id="modal-4">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">AI Search · n8n + Supabase</div>
+        <h2 class="wf-modal-title">AI Document Search Engine with Semantic Retrieval</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-4"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>Two-pipeline AI system: one pipeline auto-ingests documents from Google Drive into a Supabase vector database. The second lets users ask questions in plain English and receive accurate, source-grounded AI answers instantly.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">Instant</span><span class="impact-label">Document search</span></div>
+            <div class="impact-item"><span class="impact-num">AI</span><span class="impact-label">Natural language</span></div>
+            <div class="impact-item"><span class="impact-num">Auto</span><span class="impact-label">Ingestion pipeline</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Google Drive</span><span class="project-tool-tag">OpenAI Embeddings</span><span class="project-tool-tag">Supabase pgvector</span><span class="project-tool-tag">GPT-4o</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Dual-Pipeline Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div style="font-size:10px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Pipeline 1 — Ingestion</div>
+            <div class="wf-flow-node trigger"><div class="wfn-icon">📁</div><div class="wfn-label">Google Drive Trigger</div><div class="wfn-sub">New document detected</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">📄</div><div class="wfn-label">Download & Parse</div><div class="wfn-sub">Chunk document text</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai"><div class="wfn-icon">🔢</div><div class="wfn-label">OpenAI Embeddings</div><div class="wfn-sub">Convert to vectors</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">🗄️</div><div class="wfn-label">Supabase Store</div><div class="wfn-sub">Save embeddings</div></div>
+            <div style="font-size:10px;font-weight:700;color:var(--accent-3);letter-spacing:1px;text-transform:uppercase;margin:16px 0 8px;">Pipeline 2 — Query</div>
+            <div class="wf-flow-node trigger" style="border-color:rgba(6,182,212,0.4)"><div class="wfn-icon">💬</div><div class="wfn-label">Chat Interface</div><div class="wfn-sub">User asks question</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai active"><div class="wfn-icon">🧠</div><div class="wfn-label">AI Agent + Vector Search</div><div class="wfn-sub">Retrieve · Synthesize · Answer</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Shopify Order Automation -->
+  <div class="wf-modal" id="modal-5">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">eCommerce · n8n + Shopify</div>
+        <h2 class="wf-modal-title">Shopify Order Fulfillment Automation</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-5"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>Every new Shopify order triggers an automated chain: inventory is decremented in real time, the warehouse receives fulfillment details, the customer gets a branded confirmation, and a complete record is appended to Google Sheets — all within seconds.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">3h+</span><span class="impact-label">Saved daily</span></div>
+            <div class="impact-item"><span class="impact-num">~0%</span><span class="impact-label">Error rate</span></div>
+            <div class="impact-item"><span class="impact-num">Instant</span><span class="impact-label">Confirmation</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Shopify API</span><span class="project-tool-tag">Gmail</span><span class="project-tool-tag">Google Sheets</span><span class="project-tool-tag">Slack</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">🛍️</div><div class="wfn-label">Shopify Order Trigger</div><div class="wfn-sub">New order placed</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🔀</div><div class="wfn-label">Validate & Route</div><div class="wfn-sub">Check payment status</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node process"><div class="wfn-icon">📦</div><div class="wfn-label">Update Inventory</div><div class="wfn-sub">Shopify API · Decrement stock</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">🏭</div><div class="wfn-label">Notify Warehouse</div><div class="wfn-sub">Email fulfillment team</div></div>
+              </div>
+            </div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📧</div><div class="wfn-label">Customer Confirmation</div><div class="wfn-sub">Branded email + tracking</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📊</div><div class="wfn-label">Log to Google Sheets</div><div class="wfn-sub">Append order record</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: AI Customer Support Bot -->
+  <div class="wf-modal" id="modal-6">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">AI Support · n8n + GPT-4o</div>
+        <h2 class="wf-modal-title">AI Customer Support Bot — Automated Ticket Resolution</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-6"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>Monitors Gmail for incoming support tickets, classifies them using AI, searches a vector knowledge base for answers, auto-responds to 80% of issues, and escalates edge cases to human agents — all in under 30 seconds per ticket.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">80%</span><span class="impact-label">Auto-resolved</span></div>
+            <div class="impact-item"><span class="impact-num">&lt;30s</span><span class="impact-label">Response time</span></div>
+            <div class="impact-item"><span class="impact-num">24/7</span><span class="impact-label">Always on</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Gmail</span><span class="project-tool-tag">OpenAI GPT-4o</span><span class="project-tool-tag">Supabase</span><span class="project-tool-tag">Google Sheets</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">📬</div><div class="wfn-label">Gmail Trigger</div><div class="wfn-sub">New support email detected</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai"><div class="wfn-icon">🏷️</div><div class="wfn-label">AI Ticket Classifier</div><div class="wfn-sub">Billing · Technical · General</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🔀</div><div class="wfn-label">Route by Category</div><div class="wfn-sub">Auto-resolve or escalate</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node ai active"><div class="wfn-icon">🧠</div><div class="wfn-label">Search KB + Generate Reply</div><div class="wfn-sub">Supabase + GPT-4o</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">👤</div><div class="wfn-label">Escalate to Human</div><div class="wfn-sub">Forward to agent</div></div>
+              </div>
+            </div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📊</div><div class="wfn-label">Log to Google Sheets</div><div class="wfn-sub">Ticket status + resolution</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 7: Lead Generation System -->
+  <div class="wf-modal" id="modal-7">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">Lead Gen · n8n + Apollo + HubSpot</div>
+        <h2 class="wf-modal-title">Automated Lead Generation & Enrichment Pipeline</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-7"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>Runs daily on a schedule — scrapes fresh leads from Apollo.io matching your ICP, enriches their data, has AI score each lead for fit, filters to quality-only, pushes to HubSpot CRM, and fires off a personalized outreach email per lead.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">50+</span><span class="impact-label">Leads/day</span></div>
+            <div class="impact-item"><span class="impact-num">AI</span><span class="impact-label">Scored & ranked</span></div>
+            <div class="impact-item"><span class="impact-num">Auto</span><span class="impact-label">CRM + outreach</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Apollo.io</span><span class="project-tool-tag">HubSpot</span><span class="project-tool-tag">OpenAI GPT-4o</span><span class="project-tool-tag">Gmail</span><span class="project-tool-tag">Google Sheets</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">⏰</div><div class="wfn-label">Daily Schedule Trigger</div><div class="wfn-sub">Runs automatically every day</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🔍</div><div class="wfn-label">Fetch Leads from Apollo</div><div class="wfn-sub">50 ICP-matched prospects</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🔄</div><div class="wfn-label">Batch + Enrich Data</div><div class="wfn-sub">Company · Tech · LinkedIn</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node ai active"><div class="wfn-icon">🧠</div><div class="wfn-label">AI Score & Qualify</div><div class="wfn-sub">GPT-4o · Filter score 7+</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node output"><div class="wfn-icon">🏢</div><div class="wfn-label">Push to HubSpot</div><div class="wfn-sub">Create contact + deal</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node output"><div class="wfn-icon">📧</div><div class="wfn-label">Send Outreach Email</div><div class="wfn-sub">AI-personalized pitch</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 8: Appointment Booking -->
+  <div class="wf-modal" id="modal-8">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">Scheduling · n8n + Calendly + Zoom</div>
+        <h2 class="wf-modal-title">Smart Appointment Booking & Reminder Automation</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-8"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>When a client books via Calendly, the workflow instantly creates a Zoom meeting, updates HubSpot, sends a branded confirmation, dispatches prep materials 24h before, and fires multi-stage reminders — zero manual steps from booking to meeting.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">0</span><span class="impact-label">Manual steps</span></div>
+            <div class="impact-item"><span class="impact-num">↑40%</span><span class="impact-label">Show-up rate</span></div>
+            <div class="impact-item"><span class="impact-num">Auto</span><span class="impact-label">Reminders</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">Calendly</span><span class="project-tool-tag">Zoom API</span><span class="project-tool-tag">HubSpot</span><span class="project-tool-tag">Gmail</span><span class="project-tool-tag">n8n</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">📅</div><div class="wfn-label">Calendly Booking Webhook</div><div class="wfn-sub">New appointment created</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🎥</div><div class="wfn-label">Create Zoom Meeting</div><div class="wfn-sub">Unique link + password</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🏢</div><div class="wfn-label">Update HubSpot CRM</div><div class="wfn-sub">Contact + meeting status</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📧</div><div class="wfn-label">Send Confirmation Email</div><div class="wfn-sub">Zoom link + agenda</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">📋</div><div class="wfn-label">24h — Prep Materials</div><div class="wfn-sub">Discovery questionnaire</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">🔔</div><div class="wfn-label">15min — Final Reminder</div><div class="wfn-sub">Join Zoom now</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===================== WORKFLOW VISUAL ===================== -->
+  <section class="section workflow-section" id="workflow">
+    <div class="container">
+      <div class="workflow-inner">
+        <!-- Workflow Canvas -->
+        <div class="workflow-canvas reveal-left">
+          <p style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;">Live Workflow Preview</p>
+          <div class="wf-nodes">
+            <div class="wf-node active">
+              <div class="wf-node-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a)">🔔</div>
+              <div class="wf-node-info">
+                <div class="wf-node-name">Webhook Trigger</div>
+                <div class="wf-node-type">Trigger node • Listening</div>
+              </div>
+              <div class="wf-node-status"></div>
+            </div>
+            <div class="wf-connector"><div class="wf-connector-line"></div></div>
+            <div class="wf-node">
+              <div class="wf-node-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">🧠</div>
+              <div class="wf-node-info">
+                <div class="wf-node-name">AI Processing (Claude)</div>
+                <div class="wf-node-type">AI node • Classify & Route</div>
+              </div>
+              <div class="wf-node-status"></div>
+            </div>
+            <div class="wf-connector"><div class="wf-connector-line"></div></div>
+            <div class="wf-node">
+              <div class="wf-node-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">🔀</div>
+              <div class="wf-node-info">
+                <div class="wf-node-name">IF / Switch Router</div>
+                <div class="wf-node-type">Logic node • Conditional</div>
+              </div>
+              <div class="wf-node-status"></div>
+            </div>
+            <div class="wf-connector"><div class="wf-connector-line"></div></div>
+            <div class="wf-node">
+              <div class="wf-node-icon" style="background:linear-gradient(135deg,#06b6d4,#0284c7)">📤</div>
+              <div class="wf-node-info">
+                <div class="wf-node-name">Send to CRM & Email</div>
+                <div class="wf-node-type">Action node • HubSpot + Gmail</div>
+              </div>
+              <div class="wf-node-status pending"></div>
+            </div>
+            <div class="wf-connector"><div class="wf-connector-line"></div></div>
+            <div class="wf-node">
+              <div class="wf-node-icon" style="background:linear-gradient(135deg,#ec4899,#be185d)">📊</div>
+              <div class="wf-node-info">
+                <div class="wf-node-name">Log to Google Sheets</div>
+                <div class="wf-node-type">Output node • Data storage</div>
+              </div>
+              <div class="wf-node-status pending"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right text -->
+        <div class="reveal-right">
+          <span class="section-tag"><i class="fas fa-sitemap"></i> How It Works</span>
+          <h2 class="section-title">
+            Automation That <span class="gradient-text">Thinks for Itself</span>
+          </h2>
+          <p style="font-size:16px;color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">
+            I design multi-step workflows that handle your most repetitive tasks automatically.
+            Each workflow is tailored to your business logic — not just drag-and-drop templates.
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">⚡</div>
+              <div>
+                <strong style="font-size:15px;color:var(--text-primary);">Event-Driven Triggers</strong>
+                <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.6;">Workflows fire instantly on form submissions, new orders, CRM changes, or scheduled intervals.</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">🧠</div>
+              <div>
+                <strong style="font-size:15px;color:var(--text-primary);">AI Decision-Making</strong>
+                <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.6;">Embedded AI nodes classify, summarize, and route data intelligently based on context.</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:40px;height:40px;border-radius:10px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">🔄</div>
+              <div>
+                <strong style="font-size:15px;color:var(--text-primary);">Error Handling & Retries</strong>
+                <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.6;">Built-in fallback paths and retry logic ensure workflows never silently fail.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:36px;">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fas fa-rocket"></i> Build My Workflow
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <!-- Image side -->
+        <div class="about-image-wrap reveal-left">
+          <div class="about-image-ring">
+            <div class="about-image-dot"></div>
+            <div class="about-image-dot"></div>
+            <div class="about-image-dot"></div>
+            <div class="about-photo">
+              <div class="about-photo-inner">👨‍💻</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content side -->
+        <div class="about-content reveal-right">
+          <span class="section-tag"><i class="fas fa-user"></i> About Me</span>
+          <h2 class="section-title">
+            Hi, I'm <span class="gradient-text">Ricky Bacaron</span>
+          </h2>
+
+          <div class="about-highlights">
+            <div class="about-highlight">
+              <div class="about-highlight-num">1yr+</div>
+              <div class="about-highlight-label">AI Automation</div>
+            </div>
+            <div class="about-highlight">
+              <div class="about-highlight-num">2yrs</div>
+              <div class="about-highlight-label">Customer Service</div>
+            </div>
+            <div class="about-highlight">
+              <div class="about-highlight-num">20+</div>
+              <div class="about-highlight-label">Workflows Built</div>
+            </div>
+          </div>
+
+          <p class="about-text">
+            I'm an <strong style="color:var(--text-primary)">AI Automation Specialist</strong> passionate about helping businesses
+            eliminate manual work and unlock new levels of efficiency through intelligent automation.
+          </p>
+          <p class="about-text">
+            Before diving into automation, I spent 2 years in customer service at companies like
+            <strong style="color:var(--text-primary)">Expedia</strong> and <strong style="color:var(--text-primary)">Airbnb</strong>,
+            where I experienced firsthand how inefficient manual processes drain time and energy.
+            That's what drove me to master AI automation — to solve those problems at scale.
+          </p>
+          <p class="about-text">
+            Today, I build end-to-end automation workflows using n8n, Make, Zapier, and AI models
+            that save businesses dozens of hours every week.
+          </p>
+
+          <div class="about-skills">
+            <span class="skill-tag">n8n</span>
+            <span class="skill-tag">Make (Integromat)</span>
+            <span class="skill-tag">Zapier</span>
+            <span class="skill-tag">OpenAI API</span>
+            <span class="skill-tag">Claude API</span>
+            <span class="skill-tag">API Integrations</span>
+            <span class="skill-tag">CRM Automation</span>
+            <span class="skill-tag">Chatbots</span>
+            <span class="skill-tag">Lead Generation</span>
+          </div>
+
+          <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fas fa-handshake"></i> Work With Me
+            </a>
+            <a href="#projects" class="btn btn-ghost">
+              <i class="fas fa-eye"></i> See My Work
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section" style="background:var(--bg-secondary);" id="testimonials">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-tag"><i class="fas fa-star"></i> Testimonials</span>
+        <h2 class="section-title">What <span class="gradient-text">Clients Say</span></h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Real feedback from businesses that have transformed their operations with automation.
+        </p>
+      </div>
+
+      <div class="testimonials-slider">
+        <div class="testimonials-track" id="testimonials-track">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              Ricky completely transformed how we handle customer inquiries. The AI chatbot he built
+              now handles 80% of our support tickets automatically. Our team can finally focus on
+              actual product development instead of answering the same questions all day.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">S</div>
+              <div>
+                <div class="testimonial-name">Sarah Mitchell</div>
+                <div class="testimonial-role">CEO, TechFlow Solutions</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              We were manually processing 200+ Shopify orders daily. Ricky automated our entire
+              fulfillment workflow in a week. We've saved 25+ hours weekly and our error rate dropped
+              to near zero. The ROI was immediate and undeniable.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">J</div>
+              <div>
+                <div class="testimonial-name">James Okonkwo</div>
+                <div class="testimonial-role">Founder, NexCart Store</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              The lead generation system Ricky built has been a game-changer. Qualified leads now
+              flow into our CRM automatically, fully enriched and scored. Our sales team's
+              conversion rate jumped 40% because they're only talking to ready-to-buy prospects.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <div class="testimonial-name">Maria Chen</div>
+                <div class="testimonial-role">Head of Sales, GrowthPath Agency</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              I was skeptical at first, but Ricky's appointment booking automation completely
+              eliminated the scheduling back-and-forth for our agency. Clients book, get a Zoom link,
+              receive reminders, and show up prepared — all without us lifting a finger. Absolutely worth every penny.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">D</div>
+              <div>
+                <div class="testimonial-name">David Reyes</div>
+                <div class="testimonial-role">Managing Director, Apex Consulting</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              Ricky built a CRM automation system that syncs our entire sales pipeline across HubSpot,
+              Slack, and Google Sheets in real time. Our managers finally have a single source of truth
+              and we stopped losing deals due to missed follow-ups. Incredible work.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">A</div>
+              <div>
+                <div class="testimonial-name">Amanda Torres</div>
+                <div class="testimonial-role">Sales Operations Manager, CloudBridge Inc.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              We hired Ricky to build a content repurposing pipeline using AI. It takes our long-form
+              blog posts and automatically generates social media captions, email newsletters, and
+              LinkedIn posts. What used to take 6 hours now takes 5 minutes. Truly next level.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">L</div>
+              <div>
+                <div class="testimonial-name">Lena Park</div>
+                <div class="testimonial-role">Content Strategist, BrandPulse Media</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              Ricky integrated our Stripe payments with Notion and Slack so our finance team gets
+              instant alerts and automatic invoice logging every time a payment comes in. What used
+              to be manual bookkeeping is now fully hands-free. Simple but life-changing for us.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">T</div>
+              <div>
+                <div class="testimonial-name">Tom Ashford</div>
+                <div class="testimonial-role">CFO, LaunchPad Startups</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              Our onboarding process used to require 4 different team members and take 3 days. Ricky
+              automated it end-to-end — from the welcome email sequence to account setup to Slack
+              channel creation. New clients are now onboarded in under 2 hours, all automatically.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">N</div>
+              <div>
+                <div class="testimonial-name">Nina Vasquez</div>
+                <div class="testimonial-role">Head of Operations, SaaSify Co.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              I run a real estate agency and Ricky built me a lead qualification bot that responds to
+              inquiries instantly, asks the right questions, scores them, and routes hot leads straight
+              to my agents via SMS. We haven't missed a hot lead since. Best investment I've made.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">R</div>
+              <div>
+                <div class="testimonial-name">Robert Kim</div>
+                <div class="testimonial-role">Owner, PrimeRealty Group</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">
+              Ricky delivered a complex multi-step n8n workflow that connects our WooCommerce store,
+              shipping provider, and review platform. Every order now triggers tracking updates,
+              delivery confirmations, and automated review requests. Our review count tripled in 60 days.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">C</div>
+              <div>
+                <div class="testimonial-name">Claire Fontaine</div>
+                <div class="testimonial-role">eCommerce Director, Maison Belle</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonials-nav">
+        <button class="tNav-btn" id="tNav-prev" aria-label="Previous">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="tNav-dots" id="tNav-dots"></div>
+        <button class="tNav-btn" id="tNav-next" aria-label="Next">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <!-- Left -->
+        <div class="contact-left reveal-left">
+          <span class="section-tag"><i class="fas fa-envelope"></i> Contact</span>
+          <h2 class="section-title">
+            Get Your Free<br><span class="gradient-text">Automation Audit</span>
+          </h2>
+          <p style="font-size:16px;color:var(--text-secondary);line-height:1.8;margin-bottom:8px;">
+            Not sure where to start? I'll analyze your current workflow and show you exactly
+            where automation can save you the most time and money — for free.
+          </p>
+
+          <div class="contact-info-items">
+            <div class="contact-info-item">
+              <div class="contact-info-icon">📧</div>
+              <div class="contact-info-text">
+                <strong>Email</strong>
+                <a href="mailto:bacaronricky84@gmail.com" style="color:var(--accent);text-decoration:none;font-size:13px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">bacaronricky84@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">💬</div>
+              <div class="contact-info-text">
+                <strong>WhatsApp</strong>
+                <span>Available for quick questions</span>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">📅</div>
+              <div class="contact-info-text">
+                <strong>Response Time</strong>
+                <span>Within 24 hours</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-social-links">
+            <a href="https://www.linkedin.com/in/ricky-bacaron/" target="_blank" rel="noopener" class="contact-social" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/rbacaron08" target="_blank" rel="noopener" class="contact-social" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/_rickybacaron" target="_blank" rel="noopener" class="contact-social" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="mailto:bacaronricky84@gmail.com" class="contact-social" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://wa.me/639811893735" target="_blank" rel="noopener" class="contact-social" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://t.me/+639811893735" target="_blank" rel="noopener" class="contact-social" aria-label="Telegram">
+              <i class="fab fa-telegram-plane"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right form -->
+        <div class="reveal-right">
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:40px;">
+            <h3 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;">Let's Build Something Great</h3>
+            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:28px;">Tell me about your business and I'll map out the perfect automation strategy.</p>
+
+            <form class="contact-form" id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fname">First Name</label>
+                  <input class="form-input" type="text" id="fname" placeholder="John" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="lname">Last Name</label>
+                  <input class="form-input" type="text" id="lname" placeholder="Doe" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input class="form-input" type="email" id="email" placeholder="john@company.com" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="service">Service Interested In</label>
+                <select class="form-select" id="service">
+                  <option value="">Select a service...</option>
+                  <option>AI Chatbot Automation</option>
+                  <option>eCommerce Automation</option>
+                  <option>CRM & Email Automation</option>
+                  <option>API Integrations</option>
+                  <option>Workflow Automation (n8n)</option>
+                  <option>Lead Generation System</option>
+                  <option>Free Automation Audit</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="timeline">Timeline</label>
+                  <select class="form-select" id="timeline">
+                    <option value="">Select timeline...</option>
+                    <option>Within a week</option>
+                    <option>1–2 weeks</option>
+                    <option>2–4 weeks</option>
+                    <option>Flexible / No rush</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="budget">Budget</label>
+                  <select class="form-select" id="budget">
+                    <option value="">Select budget...</option>
+                    <option>&lt; $1,000</option>
+                    <option>$1,000 – $2,000</option>
+                    <option>$3,000+</option>
+                    <option>Hourly basis project</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Describe Your Workflow Challenge</label>
+                <textarea class="form-textarea" id="message" placeholder="Tell me what processes you want to automate, what tools you currently use, and what problems you're facing..." required></textarea>
+              </div>
+              <button type="submit" class="form-submit">
+                <i class="fas fa-paper-plane"></i>
+                Send Message — It's Free
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo" style="margin-bottom:12px;display:inline-flex;">
+            <div class="nav-logo-icon">⚡</div>
+            <span>Ricky<span class="gradient-text">AI</span></span>
+          </a>
+          <p>AI Automation Specialist helping businesses save time, reduce costs, and scale using intelligent workflow automation.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">AI Chatbots</a></li>
+            <li><a href="#services">eCommerce</a></li>
+            <li><a href="#services">CRM Automation</a></li>
+            <li><a href="#services">API Integration</a></li>
+            <li><a href="#services">n8n Workflows</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/ricky-bacaron/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" style="width:16px"></i> LinkedIn</a></li>
+            <li><a href="https://www.facebook.com/rbacaron08" target="_blank" rel="noopener"><i class="fab fa-facebook-f" style="width:16px"></i> Facebook</a></li>
+            <li><a href="https://github.com/n8n-rickybacaron8" target="_blank" rel="noopener"><i class="fab fa-github" style="width:16px"></i> GitHub</a></li>
+            <li><a href="https://www.instagram.com/_rickybacaron" target="_blank" rel="noopener"><i class="fab fa-instagram" style="width:16px"></i> Instagram</a></li>
+            <li><a href="https://wa.me/639811893735" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="width:16px"></i> WhatsApp</a></li>
+            <li><a href="https://t.me/+639811893735" target="_blank" rel="noopener"><i class="fab fa-telegram-plane" style="width:16px"></i> Telegram</a></li>
+            <li><a href="mailto:bacaronricky84@gmail.com"><i class="fas fa-envelope" style="width:16px"></i> Email</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Ricky Bacaron — AI Automation Specialist. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    /* ---- THEME ---- */
+    const root = document.documentElement;
+    const toggleBtn = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    root.setAttribute('data-theme', savedTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    /* ---- NAV MOBILE ---- */
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    /* ---- SCROLL REVEAL ---- */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    /* ---- TOOLS MARQUEE ---- */
+    const tools = [
+      { name: 'n8n', logo: 'https://avatars.githubusercontent.com/u/45487711', color: '#ea4b71' },
+      { name: 'Make', logo: 'https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_8625e58d8a65f49a3a0efe1ff21a91f3/make.png', color: '#6f42c1' },
+      { name: 'Zapier', logo: 'https://cdn.worldvectorlogo.com/logos/zapier-1.svg', color: '#ff4a00' },
+      { name: 'OpenAI', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/320px-OpenAI_Logo.svg.png', color: '#10a37f' },
+      { name: 'Claude AI', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Anthropic_logo.svg/320px-Anthropic_logo.svg.png', color: '#c96442' },
+      { name: 'HubSpot', logo: 'https://cdn.worldvectorlogo.com/logos/hubspot.svg', color: '#ff7a59' },
+      { name: 'Shopify', logo: 'https://cdn.worldvectorlogo.com/logos/shopify.svg', color: '#96bf48' },
+      { name: 'Notion', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/240px-Notion-logo.svg.png', color: '#ffffff' },
+      { name: 'Airtable', logo: 'https://cdn.worldvectorlogo.com/logos/airtable.svg', color: '#18bfff' },
+      { name: 'Google Sheets', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Google_Sheets_2020_Logo.svg/240px-Google_Sheets_2020_Logo.svg.png', color: '#34a853' },
+      { name: 'Slack', logo: 'https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg', color: '#4a154b' },
+      { name: 'Stripe', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/320px-Stripe_Logo%2C_revised_2016.svg.png', color: '#635bff' },
+    ];
+
+    const track = document.getElementById('tools-track');
+    // duplicate for seamless loop
+    const allTools = [...tools, ...tools];
+    allTools.forEach(tool => {
+      const pill = document.createElement('div');
+      pill.className = 'tool-pill';
+      pill.innerHTML = `
+        <img src="${tool.logo}" alt="${tool.name}" onerror="this.style.display='none'"/>
+        <span>${tool.name}</span>
+      `;
+      track.appendChild(pill);
+    });
+
+    /* ---- TESTIMONIALS SLIDER ---- */
+    const tTrack = document.getElementById('testimonials-track');
+    const tCards = tTrack.querySelectorAll('.testimonial-card');
+    const dotsContainer = document.getElementById('tNav-dots');
+    let currentSlide = 0;
+    const totalSlides = tCards.length;
+
+    // Determine how many cards are visible at once
+    function visibleCount() {
+      return window.innerWidth <= 768 ? 1 : 2;
+    }
+
+    // Max index we can scroll to (so last page is always full)
+    function maxSlide() {
+      return totalSlides - visibleCount();
+    }
+
+    // Card width as % of track container
+    function cardWidthPct() {
+      return window.innerWidth <= 768 ? 100 : 50;
+    }
+
+    // Create dots — one per "page"
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      const pages = maxSlide() + 1;
+      for (let i = 0; i < pages; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'tNav-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+    buildDots();
+
+    function goToSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, maxSlide()));
+      // Wrap around
+      if (index < 0) currentSlide = maxSlide();
+      if (index > maxSlide()) currentSlide = 0;
+
+      const offset = currentSlide * cardWidthPct();
+      tTrack.style.transform = `translateX(-${offset}%)`;
+
+      document.querySelectorAll('.tNav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    document.getElementById('tNav-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
+    document.getElementById('tNav-next').addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    // Rebuild on resize so dots + offsets stay correct
+    window.addEventListener('resize', () => {
+      buildDots();
+      goToSlide(currentSlide);
+    });
+
+    // Auto-slide every 4s
+    let autoSlide = setInterval(() => goToSlide(currentSlide + 1), 4000);
+
+    // Pause on hover
+    tTrack.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    tTrack.addEventListener('mouseleave', () => {
+      autoSlide = setInterval(() => goToSlide(currentSlide + 1), 4000);
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    tTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    tTrack.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
+    });
+
+    /* ---- CONTACT FORM ---- */
+    const form = document.getElementById('contact-form');
+    const toast = document.getElementById('toast');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        form.reset();
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message — It\'s Free';
+        btn.disabled = false;
+
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+      }, 1500);
+    });
+
+    /* ---- THREE.JS HERO 3D ---- */
+    try {
+      const canvas = document.getElementById('hero-canvas');
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, canvas.offsetWidth / canvas.offsetHeight, 0.1, 100);
+      camera.position.set(0, 0, 5);
+
+      // Lights
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+      scene.add(ambientLight);
+      const light1 = new THREE.DirectionalLight(0x6366f1, 2);
+      light1.position.set(5, 5, 5);
+      scene.add(light1);
+      const light2 = new THREE.DirectionalLight(0x8b5cf6, 1.5);
+      light2.position.set(-5, -3, 3);
+      scene.add(light2);
+      const light3 = new THREE.DirectionalLight(0x06b6d4, 1);
+      light3.position.set(0, 5, -5);
+      scene.add(light3);
+
+      // Central torus knot
+      const geo1 = new THREE.TorusKnotGeometry(1.2, 0.38, 150, 20);
+      const mat1 = new THREE.MeshPhysicalMaterial({
+        color: 0x6366f1,
+        metalness: 0.9,
+        roughness: 0.1,
+        reflectivity: 1,
+        wireframe: false,
+      });
+      const torusKnot = new THREE.Mesh(geo1, mat1);
+      scene.add(torusKnot);
+
+      // Wireframe overlay
+      const geo2 = new THREE.TorusKnotGeometry(1.25, 0.4, 80, 16);
+      const mat2 = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true, transparent: true, opacity: 0.15 });
+      const wireframe = new THREE.Mesh(geo2, mat2);
+      scene.add(wireframe);
+
+      // Floating particles
+      const particleGeo = new THREE.BufferGeometry();
+      const count = 200;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 10;
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({ color: 0x6366f1, size: 0.04, transparent: true, opacity: 0.6 });
+      const particles = new THREE.Points(particleGeo, particleMat);
+      scene.add(particles);
+
+      // Orbit ring
+      const ringGeo = new THREE.TorusGeometry(2.2, 0.03, 16, 100);
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.4 });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 4;
+      scene.add(ring);
+
+      // Second ring
+      const ring2 = new THREE.Mesh(
+        new THREE.TorusGeometry(1.8, 0.02, 16, 100),
+        new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.3 })
+      );
+      ring2.rotation.x = -Math.PI / 3;
+      ring2.rotation.y = Math.PI / 5;
+      scene.add(ring2);
+
+      // Mouse interaction
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      // Animation loop
+      let t = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        t += 0.005;
+
+        torusKnot.rotation.x += 0.005;
+        torusKnot.rotation.y += 0.008;
+        wireframe.rotation.x -= 0.003;
+        wireframe.rotation.y -= 0.005;
+        ring.rotation.z += 0.004;
+        ring2.rotation.z -= 0.003;
+        particles.rotation.y += 0.001;
+
+        // Mouse parallax
+        torusKnot.rotation.x += mouseY * 0.001;
+        torusKnot.rotation.y += mouseX * 0.001;
+
+        // Pulsing scale
+        const scale = 1 + Math.sin(t * 2) * 0.04;
+        torusKnot.scale.setScalar(scale);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Resize handler
+      const resizeCanvas = () => {
+        const w = canvas.offsetWidth;
+        const h = canvas.offsetHeight || 520;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      };
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+    } catch (err) {
+      console.warn('Three.js unavailable:', err);
+      // Fallback: CSS 3D animation
+      const canvas = document.getElementById('hero-canvas');
+      canvas.style.background = 'radial-gradient(ellipse at center, rgba(99,102,241,0.2) 0%, transparent 70%)';
+    }
+
+    /* ---- ACTIVE NAV ON SCROLL ---- */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinkEls = document.querySelectorAll('.nav-links a');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          navLinkEls.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + id
+              ? 'var(--accent)' : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+
+    sections.forEach(s => navObserver.observe(s));
+
+    /* ---- WORKFLOW MODALS ---- */
+    const overlay = document.getElementById('wf-modal-overlay');
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      overlay.classList.add('active');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeAllModals() {
+      document.querySelectorAll('.wf-modal.active').forEach(m => {
+        m.classList.remove('active');
+      });
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Open via "View Workflow" buttons
+    document.querySelectorAll('.open-modal').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(btn.dataset.modal);
+      });
+    });
+
+    // Open via clicking anywhere on project card
+    document.querySelectorAll('.project-card[data-modal]').forEach(card => {
+      card.addEventListener('click', () => openModal(card.dataset.modal));
+    });
+
+    // Close via X button
+    document.querySelectorAll('.wf-modal-close').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeModal(btn.dataset.modal);
+      });
+    });
+
+    // Close via overlay click
+    overlay.addEventListener('click', closeAllModals);
+
+    // Close via Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllModals();
+    });
+
+  })();
+  </script>
+</body>
+</html>
