@@ -2398,6 +2398,10 @@
                 <input class="form-input" type="email" id="email" placeholder="john@company.com" required />
               </div>
               <div class="form-group">
+                <label class="form-label" for="company">Company Name</label>
+                <input class="form-input" type="text" id="company" placeholder="Your Company (optional)" />
+              </div>
+              <div class="form-group">
                 <label class="form-label" for="service">Service Interested In</label>
                 <select class="form-select" id="service">
                   <option value="">Select a service...</option>
@@ -2651,20 +2655,53 @@
     const form = document.getElementById('contact-form');
     const toast = document.getElementById('toast');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = form.querySelector('.form-submit');
-      btn.textContent = 'Sending...';
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       btn.disabled = true;
 
-      setTimeout(() => {
+      const payload = {
+        fname:    document.getElementById('fname').value.trim(),
+        lname:    document.getElementById('lname').value.trim(),
+        email:    document.getElementById('email').value.trim(),
+        company:  document.getElementById('company').value.trim(),
+        service:  document.getElementById('service').value,
+        timeline: document.getElementById('timeline').value,
+        budget:   document.getElementById('budget').value,
+        message:  document.getElementById('message').value.trim()
+      };
+
+      try {
+        const res = await fetch('https://n8n.srv1574485.hstgr.cloud/webhook/website-lead-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Server error');
+
         form.reset();
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 5000);
+      } catch (err) {
+        console.error('Form submission error:', err);
+        const toastText = toast.querySelector('.toast-text');
+        const toastIcon = toast.querySelector('.toast-icon');
+        if (toastText) toastText.textContent = 'Something went wrong. Please email me directly at bacaronricky84@gmail.com';
+        if (toastIcon) toastIcon.textContent = '❌';
+        toast.style.background = '#ef4444';
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+          if (toastText) toastText.textContent = "Message sent! I'll get back to you within 24 hours.";
+          if (toastIcon) toastIcon.textContent = '✅';
+          toast.style.background = '';
+        }, 6000);
+      } finally {
         btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message — It\'s Free';
         btn.disabled = false;
-
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-      }, 1500);
+      }
     });
 
     /* ---- THREE.JS HERO 3D ---- */
