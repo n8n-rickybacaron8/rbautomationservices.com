@@ -1179,6 +1179,12 @@
           <p class="service-desc">Build automated lead capture, scoring, enrichment, and follow-up systems that fill your pipeline with qualified prospects without manual effort.</p>
           <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
         </div>
+        <div class="service-card reveal" style="transition-delay:0.6s">
+          <div class="service-icon">🚀</div>
+          <h3 class="service-title">Automated Funnels & High-Converting Websites</h3>
+          <p class="service-desc">Design and build AI-powered sales funnels with optimized landing pages, automated email sequences, behavior-based triggers, and real-time analytics — turning traffic into revenue on autopilot.</p>
+          <span class="service-arrow">Learn more <i class="fas fa-arrow-right"></i></span>
+        </div>
       </div>
     </div>
   </section>
@@ -1434,6 +1440,41 @@
             </div>
             <div class="project-footer">
               <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-7">
+                <i class="fas fa-diagram-project"></i> View Workflow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 9: Automated Funnel -->
+        <div class="project-card reveal" style="transition-delay:0s" data-modal="modal-9">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(251,113,133,0.15),rgba(251,191,36,0.1));"></div>
+            <div class="project-thumb-icon">🚀</div>
+            <div class="project-thumb-tag">Sales Funnel</div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Automated Sales Funnel & High-Converting Landing Page System</h3>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Problem</span>
+                <span class="project-meta-value">Business was spending $3,000/mo on ads but converting less than 1% of visitors — no follow-up sequences, no lead nurturing, generic landing page with no personalization.</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Solution</span>
+                <span class="project-meta-value">Built a complete funnel: AI-optimized landing page, automated 14-day email nurture sequence, behavior-based triggers (clicks/opens), lead scoring, and auto-book calls for hot leads — all on autopilot.</span>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="project-tool-tag">n8n</span>
+              <span class="project-tool-tag">Framer</span>
+              <span class="project-tool-tag">OpenAI GPT-4o</span>
+              <span class="project-tool-tag">ConvertKit</span>
+              <span class="project-tool-tag">Stripe</span>
+              <span class="project-tool-tag">Google Analytics</span>
+            </div>
+            <div class="project-footer">
+              <button class="btn btn-ghost btn-sm open-modal" data-modal="modal-9">
                 <i class="fas fa-diagram-project"></i> View Workflow
               </button>
             </div>
@@ -1932,6 +1973,82 @@
     </div>
   </div>
 
+  <!-- Modal 9: Automated Funnel -->
+  <div class="wf-modal" id="modal-9">
+    <div class="wf-modal-header">
+      <div>
+        <div class="wf-modal-tag">Sales Funnel · n8n + Framer + ConvertKit</div>
+        <h2 class="wf-modal-title">Automated Sales Funnel & High-Converting Landing Page System</h2>
+      </div>
+      <button class="wf-modal-close" data-modal="modal-9"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wf-modal-body">
+      <div class="wf-modal-left">
+        <div class="wf-modal-section">
+          <h4>Overview</h4>
+          <p>A full-stack funnel system combining an AI-optimized landing page (built in Framer) with an n8n automation backbone. When a visitor opts in, the workflow captures and scores the lead, fires a personalized 14-day email sequence via ConvertKit, tracks engagement behavior, and auto-books calls for hot leads — all without any manual effort.</p>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Business Impact</h4>
+          <div class="wf-modal-impact">
+            <div class="impact-item"><span class="impact-num">3.2×</span><span class="impact-label">Conversion rate</span></div>
+            <div class="impact-item"><span class="impact-num">62%</span><span class="impact-label">Email open rate</span></div>
+            <div class="impact-item"><span class="impact-num">−78%</span><span class="impact-label">Cost per lead</span></div>
+          </div>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Key Features</h4>
+          <ul style="margin:0;padding-left:18px;line-height:1.9;color:var(--text-secondary);font-size:14px;">
+            <li>AI-generated, split-tested headline & copy variations</li>
+            <li>Instant lead capture → Google Sheets + CRM sync</li>
+            <li>14-day automated email nurture sequence</li>
+            <li>Behavior scoring (clicks, opens, page revisits)</li>
+            <li>Hot lead alert → Auto Calendly booking link sent</li>
+            <li>Stripe checkout triggered for warm product leads</li>
+            <li>Real-time Google Analytics conversion events</li>
+          </ul>
+        </div>
+        <div class="wf-modal-section">
+          <h4>Tools Used</h4>
+          <div class="wf-modal-tools">
+            <span class="project-tool-tag">n8n</span>
+            <span class="project-tool-tag">Framer</span>
+            <span class="project-tool-tag">OpenAI GPT-4o</span>
+            <span class="project-tool-tag">ConvertKit</span>
+            <span class="project-tool-tag">Stripe</span>
+            <span class="project-tool-tag">Google Analytics</span>
+            <span class="project-tool-tag">Calendly</span>
+            <span class="project-tool-tag">Google Sheets</span>
+          </div>
+        </div>
+        <div class="wf-modal-badge"><i class="fas fa-eye"></i> View Only — Read-only preview of a live workflow</div>
+      </div>
+      <div class="wf-modal-right">
+        <div class="wf-canvas-label">Workflow Architecture</div>
+        <div class="wf-canvas">
+          <div class="wf-flow">
+            <div class="wf-flow-node trigger"><div class="wfn-icon">🚀</div><div class="wfn-label">Landing Page Opt-In</div><div class="wfn-sub">Framer form → n8n webhook</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">🧠</div><div class="wfn-label">AI Lead Scoring</div><div class="wfn-sub">GPT-4o scores fit & intent</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node process"><div class="wfn-icon">📊</div><div class="wfn-label">Save to CRM + Sheets</div><div class="wfn-sub">Lead data + score logged</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-node output"><div class="wfn-icon">📧</div><div class="wfn-label">14-Day Email Sequence</div><div class="wfn-sub">ConvertKit automated nurture</div></div>
+            <div class="wf-flow-arrow"></div>
+            <div class="wf-flow-branch">
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">🔥</div><div class="wfn-label">Hot Lead → Book Call</div><div class="wfn-sub">Calendly link auto-sent</div></div>
+              </div>
+              <div class="wf-flow-branch-item">
+                <div class="wf-flow-node tool"><div class="wfn-icon">💳</div><div class="wfn-label">Warm Lead → Stripe</div><div class="wfn-sub">Checkout link triggered</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="divider"></div>
 
   <!-- ===================== WORKFLOW VISUAL ===================== -->
@@ -2411,6 +2528,7 @@
                   <option>API Integrations</option>
                   <option>Workflow Automation (n8n)</option>
                   <option>Lead Generation System</option>
+                  <option>Automated Funnels &amp; High-Converting Websites</option>
                   <option>Free Automation Audit</option>
                 </select>
               </div>
@@ -2497,7 +2615,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© 2026 Ricky Bacaron — AI Automation Specialist. All rights reserved.</p>
+        <p>© 2025 Ricky Bacaron — AI Automation Specialist. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
