@@ -580,38 +580,34 @@
     }
     .about-image-ring {
       width: 320px; height: 320px; border-radius: 50%;
-      border: 2px solid var(--border);
       display: flex; align-items: center; justify-content: center;
       position: relative;
-      animation: spin-slow 20s linear infinite;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3));
+      padding: 4px;
     }
-    @keyframes spin-slow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
     .about-image-ring::before {
-      content: ''; position: absolute; inset: 8px;
-      border-radius: 50%; border: 1px solid rgba(99,102,241,0.2);
+      content: ''; position: absolute; inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
+      animation: pulse-glow 3s ease-in-out infinite;
     }
-    .about-image-dot {
-      position: absolute; width: 12px; height: 12px;
-      border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 20px var(--glow);
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
     }
-    .about-image-dot:nth-child(1) { top: 0; left: 50%; transform: translate(-50%,-50%); }
-    .about-image-dot:nth-child(2) { bottom: 0; left: 50%; transform: translate(-50%,50%); }
-    .about-image-dot:nth-child(3) { left: 0; top: 50%; transform: translate(-50%,-50%); background: var(--accent-3); }
+    .about-image-dot { display: none; }
     .about-photo {
-      width: 260px; height: 260px; border-radius: 50%;
-      object-fit: cover; background: var(--bg-secondary);
-      border: 3px solid var(--accent);
+      width: 312px; height: 312px; border-radius: 50%;
+      background: var(--bg-secondary);
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; box-shadow: 0 0 60px var(--glow);
-      overflow: hidden;
+      flex-shrink: 0; overflow: hidden;
     }
     .about-photo-inner {
-      width: 260px; height: 260px; border-radius: 50%;
+      width: 100%; height: 100%; border-radius: 50%;
       overflow: hidden;
     }
     .about-photo-inner img {
-      width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
       display: block;
     }
     .about-content { }
