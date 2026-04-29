@@ -980,6 +980,68 @@
       transition: transform var(--transition);
     }
     .section-title:hover span::after { transform: scaleX(1); }
+
+    /* =====================================================
+       REAL LIFE PROJECTS SECTION
+    ===================================================== */
+    .rlp-tabs {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 48px; margin-top: 48px;
+    }
+    .rlp-tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 100px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-secondary); transition: all var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+    .rlp-tab:hover { border-color: var(--border-hover); color: var(--text-primary); background: var(--bg-card-hover); }
+    .rlp-tab.active {
+      background: var(--gradient-hero); color: #fff;
+      border-color: transparent; box-shadow: 0 0 20px var(--glow);
+    }
+    .rlp-panel { display: none; }
+    .rlp-panel.active { display: block; }
+    .rlp-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .rlp-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden; transition: all var(--transition);
+    }
+    .rlp-card:hover {
+      border-color: var(--border-hover); transform: translateY(-5px);
+      box-shadow: var(--shadow-card), 0 0 30px var(--glow);
+    }
+    .rlp-photo {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+    }
+    .rlp-photo-placeholder {
+      width: 100%; aspect-ratio: 16/10;
+      background: var(--bg-secondary);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      color: var(--text-muted); font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rlp-photo-placeholder i { font-size: 36px; opacity: 0.4; }
+    .rlp-card-body { padding: 20px 24px; }
+    .rlp-card-tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+      background: rgba(99,102,241,0.1); color: var(--accent);
+      border: 1px solid rgba(99,102,241,0.2);
+    }
+    .rlp-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px; font-weight: 700; margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .rlp-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .rlp-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
   </style>
 </head>
 <body>
@@ -1009,6 +1071,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#real-projects">Real Projects</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -2048,6 +2111,101 @@
 
   <div class="divider"></div>
 
+  <!-- ===================== REAL LIFE PROJECTS ===================== -->
+  <section class="section" id="real-projects">
+    <div class="container">
+      <div class="projects-header">
+        <div>
+          <span class="section-tag"><i class="fas fa-camera"></i> Real Work</span>
+          <h2 class="section-title">Real Life <span class="gradient-text">Projects</span></h2>
+          <p class="section-subtitle">Actual screenshots and results from real automation systems I've built — not demos, real delivered work.</p>
+        </div>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="rlp-tabs">
+        <button class="rlp-tab active" data-panel="rlp-n8n"><i class="fas fa-diagram-project"></i> n8n Workflows</button>
+        <button class="rlp-tab" data-panel="rlp-ghl"><i class="fas fa-bolt"></i> GoHighLevel</button>
+        <button class="rlp-tab" data-panel="rlp-video"><i class="fas fa-film"></i> AI Video Creation</button>
+        <button class="rlp-tab" data-panel="rlp-funnel"><i class="fas fa-globe"></i> Funnel &amp; Website</button>
+      </div>
+
+      <!-- Panel: n8n Workflows -->
+      <div class="rlp-panel active" id="rlp-n8n">
+        <div class="rlp-grid">
+          <!-- n8n project cards will be added here -->
+          <div class="rlp-card reveal">
+            <div class="rlp-photo-placeholder">
+              <i class="fas fa-diagram-project"></i>
+              <span>Projects coming soon</span>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">n8n</span>
+              <h3 class="rlp-card-title">Real n8n Automation Projects</h3>
+              <p class="rlp-card-desc">Screenshots of live n8n workflows built for real clients will be displayed here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: GoHighLevel -->
+      <div class="rlp-panel" id="rlp-ghl">
+        <div class="rlp-grid">
+          <!-- GoHighLevel project cards will be added here -->
+          <div class="rlp-card reveal">
+            <div class="rlp-photo-placeholder">
+              <i class="fas fa-bolt"></i>
+              <span>Projects coming soon</span>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">GoHighLevel</span>
+              <h3 class="rlp-card-title">Real GoHighLevel Automation Projects</h3>
+              <p class="rlp-card-desc">Screenshots of GoHighLevel workflow automations built for real clients will be displayed here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: AI Video Creation -->
+      <div class="rlp-panel" id="rlp-video">
+        <div class="rlp-grid">
+          <!-- AI Video project cards will be added here -->
+          <div class="rlp-card reveal">
+            <div class="rlp-photo-placeholder">
+              <i class="fas fa-film"></i>
+              <span>Projects coming soon</span>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">Real AI Video Creation Projects</h3>
+              <p class="rlp-card-desc">Screenshots and previews of AI-generated video projects will be displayed here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: Funnel & Website -->
+      <div class="rlp-panel" id="rlp-funnel">
+        <div class="rlp-grid">
+          <!-- Funnel/Website project cards will be added here -->
+          <div class="rlp-card reveal">
+            <div class="rlp-photo-placeholder">
+              <i class="fas fa-globe"></i>
+              <span>Projects coming soon</span>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Funnel / Website</span>
+              <h3 class="rlp-card-title">Real Funnel &amp; Website Projects</h3>
+              <p class="rlp-card-desc">Screenshots of funnels and websites created for real clients will be displayed here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ===================== WORKFLOW VISUAL ===================== -->
   <section class="section workflow-section" id="workflow">
     <div class="container">
@@ -2201,7 +2359,7 @@
             That's what drove me to master AI automation — to solve those problems at scale.
           </p>
           <p class="about-text">
-            Today, I build end-to-end automation workflows using n8n, Make, Zapier, and AI models
+            Today, I build end-to-end automation workflows using n8n, Make, Zapier, GoHighLevel, and AI models
             that save businesses dozens of hours every week.
           </p>
 
@@ -2209,6 +2367,7 @@
             <span class="skill-tag">n8n</span>
             <span class="skill-tag">Make (Integromat)</span>
             <span class="skill-tag">Zapier</span>
+            <span class="skill-tag">GoHighLevel</span>
             <span class="skill-tag">OpenAI API</span>
             <span class="skill-tag">Claude API</span>
             <span class="skill-tag">API Integrations</span>
@@ -2669,6 +2828,7 @@
       { name: 'n8n', logo: 'https://avatars.githubusercontent.com/u/45487711', color: '#ea4b71' },
       { name: 'Make', logo: 'https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_8625e58d8a65f49a3a0efe1ff21a91f3/make.png', color: '#6f42c1' },
       { name: 'Zapier', logo: 'https://cdn.worldvectorlogo.com/logos/zapier-1.svg', color: '#ff4a00' },
+      { name: 'GoHighLevel', logo: 'https://avatars.githubusercontent.com/u/90528289', color: '#f9a825' },
       { name: 'OpenAI', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/320px-OpenAI_Logo.svg.png', color: '#10a37f' },
       { name: 'Claude AI', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Anthropic_logo.svg/320px-Anthropic_logo.svg.png', color: '#c96442' },
       { name: 'HubSpot', logo: 'https://cdn.worldvectorlogo.com/logos/hubspot.svg', color: '#ff7a59' },
@@ -3015,6 +3175,17 @@
     // Close via Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeAllModals();
+    });
+
+    /* ---- REAL LIFE PROJECTS TABS ---- */
+    document.querySelectorAll('.rlp-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const panelId = tab.dataset.panel;
+        document.querySelectorAll('.rlp-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.rlp-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(panelId).classList.add('active');
+      });
     });
 
   })();
