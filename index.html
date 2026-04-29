@@ -1065,6 +1065,33 @@
       transition: all var(--transition);
     }
     .rlp-live-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--glow); }
+
+    /* video cards */
+    .rlp-video-wrap {
+      width: 100%; aspect-ratio: 9/16; max-height: 420px;
+      background: #000; overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .rlp-video-wrap video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .rlp-video-play-hint {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.35); transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .rlp-video-play-hint i {
+      font-size: 48px; color: rgba(255,255,255,0.85);
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    }
+    .rlp-card:hover .rlp-video-play-hint { opacity: 0; }
+    .rlp-video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+    }
   </style>
 </head>
 <body>
@@ -2574,19 +2601,116 @@
 
       <!-- Panel: AI Video Creation -->
       <div class="rlp-panel" id="rlp-video">
-        <div class="rlp-grid">
-          <!-- AI Video project cards will be added here -->
+        <div class="rlp-video-grid">
+
           <div class="rlp-card reveal">
-            <div class="rlp-photo-placeholder">
-              <i class="fas fa-film"></i>
-              <span>Projects coming soon</span>
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(2).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
               <span class="rlp-card-tag">AI Video</span>
-              <h3 class="rlp-card-title">Real AI Video Creation Projects</h3>
-              <p class="rlp-card-desc">Screenshots and previews of AI-generated video projects will be displayed here.</p>
+              <h3 class="rlp-card-title">AI Short Video #1</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
             </div>
           </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.05s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(3).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #2</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.1s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(4).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #3</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.15s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(5).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #4</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.2s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(7).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #5</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.25s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(8).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #6</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.3s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(9).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #7</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.35s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(16).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #8</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
+          <div class="rlp-card reveal" style="transition-delay:0.4s">
+            <div class="rlp-video-wrap">
+              <video src="AI%20Video%20Creation/video%20(18).mp4" muted loop preload="metadata" playsinline></video>
+              <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Video</span>
+              <h3 class="rlp-card-title">AI Short Video #9</h3>
+              <p class="rlp-card-desc">AI-generated short-form video created using automated image generation, voiceover synthesis, and video rendering pipeline.</p>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -3614,6 +3738,14 @@
     // Close via Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeAllModals();
+    });
+
+    /* ---- AI VIDEO HOVER PLAY ---- */
+    document.querySelectorAll('.rlp-video-wrap').forEach(wrap => {
+      const video = wrap.querySelector('video');
+      if (!video) return;
+      wrap.addEventListener('mouseenter', () => video.play());
+      wrap.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
     });
 
     /* ---- REAL LIFE PROJECTS TABS ---- */
