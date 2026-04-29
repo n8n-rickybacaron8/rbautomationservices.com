@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BuildRight Construction — Quality Builds, Every Time</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 900: '#0a1628', 800: '#0f2040', 700: '#1a3260', 600: '#1e3a8a' },
+            orange: { 500: '#f97316', 600: '#ea580c', 400: '#fb923c' }
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Fade-up animation */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Fade-in animation */
+    .fade-in { opacity: 0; transition: opacity 0.8s ease; }
+    .fade-in.visible { opacity: 1; }
+
+    /* Scale-in animation */
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
+
+    /* Sticky quote button pulse */
+    @keyframes pulse-orange {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.5); }
+      50% { box-shadow: 0 0 0 12px rgba(249,115,22,0); }
+    }
+    .pulse-btn { animation: pulse-orange 2.5s infinite; }
+
+    /* Hero gradient overlay */
+    .hero-overlay { background: linear-gradient(135deg, rgba(10,22,40,0.88) 0%, rgba(10,22,40,0.6) 60%, rgba(10,22,40,0.3) 100%); }
+
+    /* Service card hover */
+    .service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+
+    /* Project image hover */
+    .project-card img { transition: transform 0.5s ease; }
+    .project-card:hover img { transform: scale(1.07); }
+
+    /* Progress bar for process steps */
+    .step-line { background: linear-gradient(90deg, #f97316, #1e3a8a); }
+
+    /* Testimonial card */
+    .testimonial-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(0,0,0,0.1); }
+
+    /* Input focus ring */
+    input:focus, select:focus, textarea:focus { outline: none; ring: none; border-color: #f97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.2); }
+
+    /* Gradient text */
+    .gradient-text { background: linear-gradient(135deg, #f97316, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Navbar scroll */
+    #navbar { transition: background 0.3s ease, box-shadow 0.3s ease; }
+    #navbar.scrolled { background: rgba(10,22,40,0.97) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+
+    /* Exit popup backdrop */
+    #exit-popup { transition: opacity 0.4s ease; }
+
+    /* Sticky form on desktop */
+    @media (min-width: 1024px) {
+      .sticky-form { position: sticky; top: 100px; }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 3px; }
+  </style>
+</head>
+<body class="font-sans bg-white text-gray-800 overflow-x-hidden">
+
+<!-- ═══════════════════════════════════════════════════════════
+     STICKY NAVIGATION
+═══════════════════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent py-4 px-6">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+        <i class="fas fa-hard-hat text-white text-lg"></i>
+      </div>
+      <div>
+        <span class="text-white font-black text-xl tracking-tight">BuildRight</span>
+        <span class="text-orange-400 font-black text-xl"> Construction</span>
+      </div>
+    </div>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="text-gray-300 hover:text-orange-400 text-sm font-medium transition-colors">Services</a>
+      <a href="#projects" class="text-gray-300 hover:text-orange-400 text-sm font-medium transition-colors">Projects</a>
+      <a href="#about" class="text-gray-300 hover:text-orange-400 text-sm font-medium transition-colors">About</a>
+      <a href="#testimonials" class="text-gray-300 hover:text-orange-400 text-sm font-medium transition-colors">Reviews</a>
+      <a href="#contact" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors">Get Free Quote</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-navy-900 mt-4 rounded-xl p-6 border border-white/10">
+    <div class="flex flex-col gap-4">
+      <a href="#services" class="text-gray-300 hover:text-orange-400 font-medium transition-colors" onclick="closeMobileMenu()">Services</a>
+      <a href="#projects" class="text-gray-300 hover:text-orange-400 font-medium transition-colors" onclick="closeMobileMenu()">Projects</a>
+      <a href="#about" class="text-gray-300 hover:text-orange-400 font-medium transition-colors" onclick="closeMobileMenu()">About</a>
+      <a href="#testimonials" class="text-gray-300 hover:text-orange-400 font-medium transition-colors" onclick="closeMobileMenu()">Reviews</a>
+      <a href="#contact" class="bg-orange-500 text-white font-semibold px-5 py-3 rounded-lg text-center transition-colors" onclick="closeMobileMenu()">Get Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     1. HERO SECTION
+═══════════════════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=85&auto=format&fit=crop"
+         alt="Construction site with cranes and workers"
+         class="w-full h-full object-cover object-center" />
+    <div class="hero-overlay absolute inset-0"></div>
+  </div>
+
+  <!-- Animated particles overlay -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-pulse" style="animation-delay:1s"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 pt-28 pb-20 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Hero Copy -->
+      <div class="fade-up">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+          <i class="fas fa-award text-xs"></i>
+          Trusted by 500+ Clients Since 2005
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+          Reliable Construction Services That Build Your
+          <span class="gradient-text"> Dream Into Reality</span>
+        </h1>
+
+        <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+          From residential homes to commercial projects, we deliver quality, safety, and precision on every build — on time and within budget.
+        </p>
+
+        <!-- Trust badges -->
+        <div class="flex flex-wrap gap-4 mb-10">
+          <div class="flex items-center gap-2 text-gray-300 text-sm">
+            <i class="fas fa-shield-halved text-orange-400"></i>
+            Licensed & Insured
+          </div>
+          <div class="flex items-center gap-2 text-gray-300 text-sm">
+            <i class="fas fa-clock text-orange-400"></i>
+            On-Time Delivery
+          </div>
+          <div class="flex items-center gap-2 text-gray-300 text-sm">
+            <i class="fas fa-star text-orange-400"></i>
+            4.9/5 Rating (200+ Reviews)
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#estimate" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-lg transition-all hover:scale-105 text-center shadow-lg shadow-orange-500/30">
+            <i class="fas fa-file-contract mr-2"></i>
+            Get a Free Project Estimate
+          </a>
+          <a href="#projects" class="border-2 border-white/30 hover:border-orange-400 text-white hover:text-orange-400 font-semibold px-8 py-4 rounded-xl text-lg transition-all text-center backdrop-blur-sm">
+            <i class="fas fa-images mr-2"></i>
+            View Our Work
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats Panel -->
+      <div class="fade-up hidden lg:block" style="transition-delay:0.3s">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8">
+          <div class="grid grid-cols-2 gap-6 mb-6">
+            <div class="bg-white/10 rounded-xl p-5 text-center">
+              <div class="text-4xl font-black text-orange-400 mb-1">20+</div>
+              <div class="text-gray-300 text-sm font-medium">Years Experience</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-5 text-center">
+              <div class="text-4xl font-black text-orange-400 mb-1">500+</div>
+              <div class="text-gray-300 text-sm font-medium">Projects Completed</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-5 text-center">
+              <div class="text-4xl font-black text-orange-400 mb-1">98%</div>
+              <div class="text-gray-300 text-sm font-medium">Client Satisfaction</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-5 text-center">
+              <div class="text-4xl font-black text-orange-400 mb-1">150+</div>
+              <div class="text-gray-300 text-sm font-medium">Expert Team</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 bg-orange-500/20 border border-orange-500/30 rounded-xl p-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-phone text-white text-sm"></i>
+            </div>
+            <div>
+              <div class="text-white font-bold text-sm">Call Us Today</div>
+              <div class="text-orange-400 font-black text-lg">+1 (800) 555-BUILD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 text-xs animate-bounce">
+    <span>Scroll Down</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     2. LEAD CAPTURE / ESTIMATE FORM
+═══════════════════════════════════════════════════════════ -->
+<section id="estimate" class="py-20 bg-gradient-to-br from-navy-900 to-navy-800 relative overflow-hidden">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><g fill=\"%23ffffff\" fill-opacity=\"1\"><path d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/></g></g></svg>');"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left copy -->
+      <div class="fade-up text-white">
+        <div class="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/40 text-orange-400 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+          <i class="fas fa-gift text-xs"></i>
+          100% Free — No Obligation
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black mb-6 leading-tight">
+          Get Your Free Construction Quote in
+          <span class="gradient-text"> 24 Hours</span>
+        </h2>
+        <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+          Tell us about your project and we'll provide a detailed, transparent estimate at absolutely no cost. Our experts are ready to help you plan your build.
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-check text-orange-400"></i>
+            </div>
+            <div>
+              <div class="font-semibold">Detailed Cost Breakdown</div>
+              <div class="text-gray-400 text-sm">Transparent pricing with no hidden fees</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-check text-orange-400"></i>
+            </div>
+            <div>
+              <div class="font-semibold">Site Assessment Included</div>
+              <div class="text-gray-400 text-sm">We visit your site to give accurate estimates</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-check text-orange-400"></i>
+            </div>
+            <div>
+              <div class="font-semibold">Fast 24-Hour Response</div>
+              <div class="text-gray-400 text-sm">We'll follow up within one business day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estimate Form -->
+      <div class="fade-up sticky-form" style="transition-delay:0.2s">
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+          <div class="text-center mb-6">
+            <div class="w-14 h-14 bg-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-clipboard-list text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900">Free Project Estimate</h3>
+            <p class="text-gray-500 text-sm mt-1">No commitment required</p>
+          </div>
+
+          <!--
+            INTEGRATION HOOK:
+            Connect this form to your CRM/automation stack:
+            • GoHighLevel: Use their embed form or post to GHL API /contacts + /opportunities
+            • HubSpot: POST to HubSpot Forms API or use HubSpot embed snippet
+            • Email automation: Send form data to ActiveCampaign / Mailchimp via webhook
+            • SMS follow-up: Trigger Twilio SMS via Zapier/n8n on form submission
+            • n8n webhook: action="https://your-n8n-instance/webhook/estimate-form" method="POST"
+          -->
+          <form id="estimate-form" onsubmit="handleEstimateSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Full Name *</label>
+                <input type="text" required placeholder="John Smith"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number *</label>
+                <input type="tel" required placeholder="+1 (555) 000-0000"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address *</label>
+              <input type="email" required placeholder="john@example.com"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Project Type *</label>
+              <select required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all text-gray-700">
+                <option value="" disabled selected>Select project type</option>
+                <option>Residential Construction</option>
+                <option>Commercial Building</option>
+                <option>Home Renovation</option>
+                <option>Roofing & Repair</option>
+                <option>Interior / Exterior Design</option>
+                <option>Structural Engineering</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Budget Range *</label>
+              <select required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all text-gray-700">
+                <option value="" disabled selected>Select budget range</option>
+                <option>Under $50,000</option>
+                <option>$50,000 – $150,000</option>
+                <option>$150,000 – $500,000</option>
+                <option>$500,000 – $1,000,000</option>
+                <option>Over $1,000,000</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Project Description</label>
+              <textarea rows="3" placeholder="Briefly describe your project..."
+                        class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all resize-none"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl text-base transition-all hover:scale-[1.02] shadow-lg shadow-orange-500/30">
+              <i class="fas fa-paper-plane mr-2"></i>
+              Request Free Estimate
+            </button>
+            <p class="text-center text-xs text-gray-400">
+              <i class="fas fa-lock mr-1"></i>
+              Your information is 100% secure and never shared.
+            </p>
+          </form>
+
+          <!-- Success message (hidden by default) -->
+          <div id="estimate-success" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-check text-green-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Request Received!</h3>
+            <p class="text-gray-500 text-sm">We'll be in touch within 24 hours with your free estimate.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     3. SERVICES SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="services" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 fade-up">
+      <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+        <i class="fas fa-tools text-xs"></i>
+        What We Build
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+        Our Construction Services
+      </h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        End-to-end construction solutions tailored to your vision, timeline, and budget.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Service 1 -->
+      <div class="service-card scale-in bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop"
+               alt="Residential Construction" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
+              <i class="fas fa-house text-white"></i>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Residential Construction</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Custom-built homes designed around your lifestyle — from foundation to finishing touches.</p>
+          <a href="#estimate" class="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm mt-4 hover:text-orange-600 transition-colors">
+            Get a Quote <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card scale-in bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100" style="transition-delay:0.1s">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80&auto=format&fit=crop"
+               alt="Commercial Buildings" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
+              <i class="fas fa-building text-white"></i>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Commercial Buildings</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Office towers, retail centers, and industrial facilities built to exact specifications.</p>
+          <a href="#estimate" class="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm mt-4 hover:text-orange-600 transition-colors">
+            Get a Quote <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card scale-in bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100" style="transition-delay:0.2s">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80&auto=format&fit=crop"
+               alt="Home Renovation" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
+              <i class="fas fa-paintroller text-white"></i>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Home Renovation</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Transform your existing space with expert renovations that increase value and comfort.</p>
+          <a href="#estimate" class="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm mt-4 hover:text-orange-600 transition-colors">
+            Get a Quote <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card scale-in bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100" style="transition-delay:0.1s">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1632823469850-1b7b0e077873?w=600&q=80&auto=format&fit=crop"
+               alt="Roofing and Repair" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
+              <i class="fas fa-house-chimney text-white"></i>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Roofing & Repair</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Durable roofing solutions and emergency repairs with premium materials and warranties.</p>
+          <a href="#estimate" class="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm mt-4 hover:text-orange-600 transition-colors">
+            Get a Quote <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card scale-in bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100" style="transition-delay:0.2s">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80&auto=format&fit=crop"
+               alt="Interior Design" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
+              <i class="fas fa-couch text-white"></i>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Interior & Exterior Design</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Stunning interiors and curb-appeal exteriors crafted by our in-house design team.</p>
+          <a href="#estimate" class="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm mt-4 hover:text-orange-600 transition-colors">
+            Get a Quote <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card scale-in bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100" style="transition-delay:0.3s">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80&auto=format&fit=crop"
+               alt="Structural Engineering" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
+              <i class="fas fa-drafting-compass text-white"></i>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Structural Engineering</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Precision engineering and analysis to ensure structural safety and code compliance.</p>
+          <a href="#estimate" class="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm mt-4 hover:text-orange-600 transition-colors">
+            Get a Quote <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     4. PROJECT SHOWCASE
+═══════════════════════════════════════════════════════════ -->
+<section id="projects" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 fade-up">
+      <div class="inline-flex items-center gap-2 bg-navy-900/10 text-navy-800 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+        <i class="fas fa-images text-xs"></i>
+        Our Portfolio
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+        Projects We're Proud Of
+      </h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        Every project tells a story of craftsmanship, precision, and partnership with our clients.
+      </p>
+    </div>
+
+    <!-- Masonry-style grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Project 1 — Large -->
+      <div class="project-card lg:col-span-2 relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer fade-in">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop"
+             alt="Modern Residential Home" class="w-full h-72 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+          <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">Residential</span>
+          <h3 class="text-white font-bold text-xl mt-2">Modern 2-Storey Residential Build</h3>
+          <p class="text-gray-300 text-sm mt-1 opacity-0 group-hover:opacity-100 transition-opacity">4-bed, 3-bath luxury home | Completed 2024 | $1.2M budget</p>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer fade-in" style="transition-delay:0.1s">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80&auto=format&fit=crop"
+             alt="Commercial Office Building" class="w-full h-72 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+          <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">Commercial</span>
+          <h3 class="text-white font-bold text-lg mt-2">Commercial Office Building Project</h3>
+          <p class="text-gray-300 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">12-floor office tower | Downtown District | $8.5M</p>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer fade-in" style="transition-delay:0.15s">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&auto=format&fit=crop"
+             alt="Luxury Kitchen Renovation" class="w-full h-64 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+          <span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">Renovation</span>
+          <h3 class="text-white font-bold text-lg mt-2">Luxury Home Renovation</h3>
+          <p class="text-gray-300 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Full kitchen + living area remodel | $320K</p>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer fade-in" style="transition-delay:0.2s">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&auto=format&fit=crop"
+             alt="Infrastructure Project" class="w-full h-64 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+          <span class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">Infrastructure</span>
+          <h3 class="text-white font-bold text-lg mt-2">Highway Overpass Construction</h3>
+          <p class="text-gray-300 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">State infrastructure project | Delivered on schedule</p>
+        </div>
+      </div>
+
+      <!-- Project 5 — Large -->
+      <div class="project-card relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer fade-in" style="transition-delay:0.25s">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80&auto=format&fit=crop"
+             alt="Apartment Complex" class="w-full h-64 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+          <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">Residential</span>
+          <h3 class="text-white font-bold text-lg mt-2">Luxury Apartment Complex</h3>
+          <p class="text-gray-300 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">48-unit complex with amenities | $4.2M project</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10 fade-up">
+      <a href="#contact" class="inline-flex items-center gap-3 border-2 border-navy-800 text-navy-800 hover:bg-navy-900 hover:text-white font-bold px-8 py-4 rounded-xl transition-all">
+        <i class="fas fa-folder-open"></i>
+        View Full Portfolio
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     5. WHY CHOOSE US
+═══════════════════════════════════════════════════════════ -->
+<section id="about" class="py-20 bg-gradient-to-br from-navy-900 to-navy-800 relative overflow-hidden">
+  <div class="absolute right-0 top-0 w-1/2 h-full opacity-10">
+    <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&q=60&auto=format&fit=crop"
+         alt="" class="w-full h-full object-cover" />
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="fade-up">
+        <div class="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/40 text-orange-400 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+          <i class="fas fa-trophy text-xs"></i>
+          Why BuildRight
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-6 leading-tight">
+          Built on Trust, Delivered with
+          <span class="gradient-text"> Excellence</span>
+        </h2>
+        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+          For over 20 years, we've been the region's most trusted construction partner — delivering projects that stand the test of time while keeping clients informed every step of the way.
+        </p>
+        <a href="#estimate" class="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-all hover:scale-105 shadow-lg shadow-orange-500/30">
+          Start Your Project
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 fade-up" style="transition-delay:0.2s">
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors">
+          <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-certificate text-orange-400 text-xl"></i>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">Licensed & Certified Engineers</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">All projects led by fully licensed civil and structural engineers.</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors">
+          <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-calendar-check text-orange-400 text-xl"></i>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">On-Time Project Delivery</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">97% of our projects complete on or before the agreed deadline.</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors">
+          <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-tags text-orange-400 text-xl"></i>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">Transparent & Affordable Pricing</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">No hidden fees. Detailed quotes so you know exactly what you're paying for.</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors">
+          <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-gem text-orange-400 text-xl"></i>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">Premium Quality Materials</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">We source only grade-A materials from certified suppliers worldwide.</p>
+        </div>
+
+        <div class="sm:col-span-2 bg-orange-500/20 border border-orange-500/40 rounded-2xl p-6 hover:bg-orange-500/25 transition-colors">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-hard-hat text-white text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-lg mb-2">Safety-First Construction Approach</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">Zero-accident track record with OSHA-compliant safety protocols on every site, every day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     6. TESTIMONIALS
+═══════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 fade-up">
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+        <i class="fas fa-star text-xs"></i>
+        4.9/5 on Google — 200+ Reviews
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+        What Our Clients Say
+      </h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        Real words from real clients who trusted us with their biggest investments.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Review 1 -->
+      <div class="testimonial-card fade-up bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-1 text-yellow-400">
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i>
+          </div>
+          <div class="flex items-center gap-1 text-gray-400 text-xs">
+            <i class="fab fa-google text-blue-500"></i>
+            <span>Google Review</span>
+          </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">
+          "They built our house exactly how we envisioned it. Very professional team! Every detail was handled with care and they were always transparent about the timeline and costs."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-navy-900 rounded-full flex items-center justify-center text-white font-bold text-sm">MR</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Michael R.</div>
+            <div class="text-gray-400 text-xs">Homeowner — Residential Build</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="testimonial-card fade-up bg-white rounded-2xl p-6 shadow-md border border-gray-100" style="transition-delay:0.1s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-1 text-yellow-400">
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i>
+          </div>
+          <div class="flex items-center gap-1 text-gray-400 text-xs">
+            <i class="fab fa-google text-blue-500"></i>
+            <span>Google Review</span>
+          </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">
+          "Excellent workmanship and always on schedule. They completed our office renovation two weeks early! The team was incredibly professional and the quality exceeded our expectations."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">SL</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Sarah L.</div>
+            <div class="text-gray-400 text-xs">CEO — Commercial Renovation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="testimonial-card fade-up bg-white rounded-2xl p-6 shadow-md border border-gray-100" style="transition-delay:0.2s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-1 text-yellow-400">
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i>
+          </div>
+          <div class="flex items-center gap-1 text-gray-400 text-xs">
+            <i class="fab fa-google text-blue-500"></i>
+            <span>Google Review</span>
+          </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">
+          "Best construction company we've worked with so far. From planning to final handover, every stage was handled flawlessly. The project manager kept us updated daily."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">DP</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Daniel P.</div>
+            <div class="text-gray-400 text-xs">Property Developer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="testimonial-card fade-up bg-white rounded-2xl p-6 shadow-md border border-gray-100" style="transition-delay:0.1s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-1 text-yellow-400">
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i>
+          </div>
+          <div class="flex items-center gap-1 text-gray-400 text-xs">
+            <i class="fab fa-google text-blue-500"></i>
+            <span>Google Review</span>
+          </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">
+          "We hired BuildRight for a major roof replacement after storm damage. They were on-site within 48 hours and had everything done in just 4 days. Incredible service!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">AT</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Amanda T.</div>
+            <div class="text-gray-400 text-xs">Homeowner — Roofing Repair</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 5 -->
+      <div class="testimonial-card fade-up bg-white rounded-2xl p-6 shadow-md border border-gray-100 md:col-span-2 lg:col-span-1" style="transition-delay:0.2s">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-1 text-yellow-400">
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+            <i class="fas fa-star text-sm"></i>
+          </div>
+          <div class="flex items-center gap-1 text-gray-400 text-xs">
+            <i class="fab fa-google text-blue-500"></i>
+            <span>Google Review</span>
+          </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">
+          "The team transformed our entire home interior in under 6 weeks. The design team nailed our vision perfectly and the execution was flawless. We couldn't be happier!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">JW</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">James W.</div>
+            <div class="text-gray-400 text-xs">Homeowner — Interior Renovation</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Google rating bar -->
+    <div class="mt-12 fade-up">
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-md p-6 max-w-2xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-3 mb-2">
+          <i class="fab fa-google text-3xl text-blue-500"></i>
+          <div>
+            <div class="text-4xl font-black text-gray-900">4.9</div>
+          </div>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+        <p class="text-gray-500 text-sm">Based on <strong class="text-gray-800">200+ verified Google Reviews</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     7. PROJECT PROCESS / TIMELINE
+═══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 fade-up">
+      <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+        <i class="fas fa-route text-xs"></i>
+        How It Works
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+        Our Simple 4-Step Process
+      </h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        From first call to final handover — a clear, stress-free journey for every client.
+      </p>
+    </div>
+
+    <!-- Desktop process line -->
+    <div class="hidden lg:flex items-start justify-between relative mb-8 fade-up">
+      <!-- Connecting line -->
+      <div class="absolute top-10 left-[12.5%] right-[12.5%] h-1 step-line rounded-full"></div>
+
+      <!-- Step 1 -->
+      <div class="flex flex-col items-center text-center max-w-[220px] z-10">
+        <div class="w-20 h-20 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-orange-500/30 mb-4">
+          <i class="fas fa-comments text-2xl"></i>
+        </div>
+        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-xs font-black mb-4 -mt-2">1</div>
+        <h3 class="font-black text-gray-900 text-lg mb-2">Consultation & Planning</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">We sit down with you to understand your vision, goals, and constraints. Free site visit included.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flex flex-col items-center text-center max-w-[220px] z-10">
+        <div class="w-20 h-20 bg-navy-800 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg mb-4">
+          <i class="fas fa-pen-ruler text-2xl"></i>
+        </div>
+        <div class="w-8 h-8 bg-navy-800 rounded-full flex items-center justify-center text-white text-xs font-black mb-4 -mt-2">2</div>
+        <h3 class="font-black text-gray-900 text-lg mb-2">Design & Proposal</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Our engineers produce detailed architectural drawings and a transparent cost proposal for your approval.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flex flex-col items-center text-center max-w-[220px] z-10">
+        <div class="w-20 h-20 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-orange-500/30 mb-4">
+          <i class="fas fa-person-digging text-2xl"></i>
+        </div>
+        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-xs font-black mb-4 -mt-2">3</div>
+        <h3 class="font-black text-gray-900 text-lg mb-2">Construction Phase</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Our skilled crews begin building with daily progress updates and strict quality control on every task.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="flex flex-col items-center text-center max-w-[220px] z-10">
+        <div class="w-20 h-20 bg-navy-800 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg mb-4">
+          <i class="fas fa-clipboard-check text-2xl"></i>
+        </div>
+        <div class="w-8 h-8 bg-navy-800 rounded-full flex items-center justify-center text-white text-xs font-black mb-4 -mt-2">4</div>
+        <h3 class="font-black text-gray-900 text-lg mb-2">Final Inspection & Handover</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">We conduct a thorough walkthrough with you, resolve any snags, and officially hand over the keys.</p>
+      </div>
+    </div>
+
+    <!-- Mobile process (vertical) -->
+    <div class="lg:hidden space-y-6">
+      <div class="flex gap-5 fade-up">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md">1</div>
+          <div class="w-0.5 bg-orange-300 flex-1 my-2"></div>
+        </div>
+        <div class="pb-4">
+          <h3 class="font-bold text-gray-900 text-lg mb-1">Consultation & Planning</h3>
+          <p class="text-gray-500 text-sm">We sit down with you to understand your vision, goals, and constraints. Free site visit included.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 fade-up" style="transition-delay:0.1s">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-navy-800 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md">2</div>
+          <div class="w-0.5 bg-blue-200 flex-1 my-2"></div>
+        </div>
+        <div class="pb-4">
+          <h3 class="font-bold text-gray-900 text-lg mb-1">Design & Proposal</h3>
+          <p class="text-gray-500 text-sm">Detailed architectural drawings and a transparent cost proposal for your approval.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 fade-up" style="transition-delay:0.2s">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md">3</div>
+          <div class="w-0.5 bg-orange-300 flex-1 my-2"></div>
+        </div>
+        <div class="pb-4">
+          <h3 class="font-bold text-gray-900 text-lg mb-1">Construction Phase</h3>
+          <p class="text-gray-500 text-sm">Skilled crews begin building with daily progress updates and strict quality control.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 fade-up" style="transition-delay:0.3s">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-navy-800 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md">4</div>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-900 text-lg mb-1">Final Inspection & Handover</h3>
+          <p class="text-gray-500 text-sm">Thorough walkthrough, snag resolution, and official key handover.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     8. BOOKING / CONSULTATION SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="contact" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left side — image + info -->
+      <div class="fade-up">
+        <div class="relative rounded-2xl overflow-hidden mb-8">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&auto=format&fit=crop"
+               alt="Construction consultation" class="w-full h-80 object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/60 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <div class="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl p-4 text-white">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
+                  <i class="fas fa-headset text-white"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-sm">Free Consultation</div>
+                  <div class="text-xs text-gray-200">Our expert team is standing by</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+          <i class="fas fa-calendar text-xs"></i>
+          Schedule a Meeting
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4 leading-tight">
+          Talk to a Construction Expert — <span class="text-orange-500">Free</span>
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mb-6">
+          Book a 30-minute consultation with one of our senior engineers. We'll review your project needs and provide actionable advice — no sales pitch, no pressure.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="text-center bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <i class="fas fa-phone text-orange-500 text-xl mb-2"></i>
+            <div class="text-xs text-gray-500 font-medium">Call Us</div>
+            <div class="text-sm font-bold text-gray-900">+1 800 555-BUILD</div>
+          </div>
+          <div class="text-center bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <i class="fas fa-envelope text-orange-500 text-xl mb-2"></i>
+            <div class="text-xs text-gray-500 font-medium">Email</div>
+            <div class="text-sm font-bold text-gray-900">info@buildright.com</div>
+          </div>
+          <div class="text-center bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <i class="fas fa-clock text-orange-500 text-xl mb-2"></i>
+            <div class="text-xs text-gray-500 font-medium">Hours</div>
+            <div class="text-sm font-bold text-gray-900">Mon–Sat 8am–6pm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="fade-up" style="transition-delay:0.2s">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <!-- Simulated calendar header -->
+          <div class="bg-navy-900 rounded-xl p-4 mb-6">
+            <div class="flex items-center justify-between text-white mb-3">
+              <button class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-chevron-left"></i></button>
+              <div class="font-bold">May 2026</div>
+              <button class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center">
+              <div class="text-gray-400 text-xs py-1">Su</div>
+              <div class="text-gray-400 text-xs py-1">Mo</div>
+              <div class="text-gray-400 text-xs py-1">Tu</div>
+              <div class="text-gray-400 text-xs py-1">We</div>
+              <div class="text-gray-400 text-xs py-1">Th</div>
+              <div class="text-gray-400 text-xs py-1">Fr</div>
+              <div class="text-gray-400 text-xs py-1">Sa</div>
+              <div class="text-gray-400 text-xs py-1 rounded"></div>
+              <div class="text-gray-400 text-xs py-1 rounded"></div>
+              <div class="text-gray-400 text-xs py-1 rounded"></div>
+              <div class="text-white text-xs py-1 rounded"></div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">1</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">2</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">3</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">4</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">5</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">6</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">7</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">8</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">9</div>
+              <div class="text-white text-xs py-1 rounded bg-orange-500 cursor-pointer font-bold">10</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">11</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">12</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">13</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">14</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">15</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">16</div>
+              <div class="text-white text-xs py-1 rounded bg-white/10 cursor-pointer hover:bg-orange-500 transition-colors">17</div>
+            </div>
+          </div>
+
+          <!--
+            BOOKING INTEGRATION:
+            • Calendly: Replace form with <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR_LINK"></div>
+            • GoHighLevel: Use GHL Calendar embed
+            • n8n: POST to webhook, then trigger Google Calendar event creation + confirmation email/SMS
+          -->
+          <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Your Name *</label>
+                <input type="text" required placeholder="Full name"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Phone *</label>
+                <input type="tel" required placeholder="Phone number"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address *</label>
+              <input type="email" required placeholder="your@email.com"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Preferred Time</label>
+              <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all text-gray-700">
+                <option>Morning (8am – 12pm)</option>
+                <option>Afternoon (12pm – 4pm)</option>
+                <option>Evening (4pm – 6pm)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Project Details *</label>
+              <textarea rows="3" required placeholder="Brief description of your project..."
+                        class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all resize-none"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-navy-900 hover:bg-navy-800 text-white font-bold py-4 rounded-xl text-base transition-all hover:scale-[1.02] shadow-lg">
+              <i class="fas fa-calendar-plus mr-2"></i>
+              Schedule Your Free Consultation
+            </button>
+          </form>
+
+          <!-- Success state -->
+          <div id="booking-success" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-calendar-check text-green-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Consultation Booked!</h3>
+            <p class="text-gray-500 text-sm">We'll send a confirmation email and call you to confirm the appointment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     9. FINAL CTA SECTION
+═══════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-gradient-to-br from-orange-500 to-orange-600 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=60&auto=format&fit=crop"
+         alt="" class="w-full h-full object-cover" />
+  </div>
+  <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(249,115,22,0.9) 0%, rgba(234,88,12,0.95) 100%)"></div>
+
+  <div class="relative max-w-4xl mx-auto px-6 text-center fade-up">
+    <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+      <i class="fas fa-hard-hat text-white text-3xl"></i>
+    </div>
+    <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+      Let's Build Your Dream Project Today
+    </h2>
+    <p class="text-orange-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+      Join 500+ satisfied clients who trusted BuildRight to turn their vision into reality. Your free estimate is just one click away.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#estimate"
+         class="bg-white hover:bg-gray-50 text-orange-600 font-black px-10 py-5 rounded-xl text-lg transition-all hover:scale-105 shadow-2xl">
+        <i class="fas fa-rocket mr-2"></i>
+        Get Started Now
+      </a>
+      <a href="tel:+18005558453"
+         class="border-2 border-white/50 hover:border-white text-white hover:bg-white/10 font-bold px-10 py-5 rounded-xl text-lg transition-all">
+        <i class="fas fa-phone mr-2"></i>
+        Call Us Now
+      </a>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="flex flex-wrap justify-center gap-6 mt-12 text-white/80 text-sm">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-shield-halved"></i>
+        Licensed & Insured
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="fas fa-star"></i>
+        4.9/5 Rating
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="fas fa-clock"></i>
+        24hr Response
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="fas fa-dollar-sign"></i>
+        Free Estimate
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════ -->
+<footer class="bg-navy-900 text-gray-400 py-14 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+            <i class="fas fa-hard-hat text-white"></i>
+          </div>
+          <span class="text-white font-black text-xl">BuildRight</span>
+        </div>
+        <p class="text-sm leading-relaxed mb-4">
+          Premium construction services delivered with precision, safety, and integrity since 2005.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-colors">
+            <i class="fab fa-facebook-f text-sm"></i>
+          </a>
+          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-colors">
+            <i class="fab fa-instagram text-sm"></i>
+          </a>
+          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-colors">
+            <i class="fab fa-linkedin-in text-sm"></i>
+          </a>
+          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-colors">
+            <i class="fab fa-youtube text-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="text-white font-bold mb-4">Services</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#services" class="hover:text-orange-400 transition-colors">Residential Construction</a></li>
+          <li><a href="#services" class="hover:text-orange-400 transition-colors">Commercial Buildings</a></li>
+          <li><a href="#services" class="hover:text-orange-400 transition-colors">Home Renovation</a></li>
+          <li><a href="#services" class="hover:text-orange-400 transition-colors">Roofing & Repair</a></li>
+          <li><a href="#services" class="hover:text-orange-400 transition-colors">Interior Design</a></li>
+          <li><a href="#services" class="hover:text-orange-400 transition-colors">Structural Engineering</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-white font-bold mb-4">Company</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#about" class="hover:text-orange-400 transition-colors">About BuildRight</a></li>
+          <li><a href="#projects" class="hover:text-orange-400 transition-colors">Our Portfolio</a></li>
+          <li><a href="#testimonials" class="hover:text-orange-400 transition-colors">Client Reviews</a></li>
+          <li><a href="#contact" class="hover:text-orange-400 transition-colors">Book Consultation</a></li>
+          <li><a href="#" class="hover:text-orange-400 transition-colors">Careers</a></li>
+          <li><a href="#" class="hover:text-orange-400 transition-colors">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-white font-bold mb-4">Contact</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-map-marker-alt text-orange-400 mt-0.5"></i>
+            <span>1234 Construction Ave, Suite 100<br/>New York, NY 10001</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="fas fa-phone text-orange-400"></i>
+            <a href="tel:+18005558453" class="hover:text-orange-400 transition-colors">+1 (800) 555-BUILD</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="fas fa-envelope text-orange-400"></i>
+            <a href="mailto:info@buildright.com" class="hover:text-orange-400 transition-colors">info@buildright.com</a>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-clock text-orange-400 mt-0.5"></i>
+            <span>Mon–Fri: 8am–6pm<br/>Saturday: 9am–4pm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+      <div>© 2026 BuildRight Construction LLC. All rights reserved.</div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-orange-400 transition-colors">Terms</a>
+        <a href="#" class="hover:text-orange-400 transition-colors">Privacy</a>
+        <a href="#" class="hover:text-orange-400 transition-colors">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STICKY QUOTE BUTTON (mobile)
+═══════════════════════════════════════════════════════════ -->
+<a href="#estimate" id="sticky-cta"
+   class="pulse-btn fixed bottom-6 right-6 z-40 bg-orange-500 hover:bg-orange-600 text-white font-bold px-5 py-3.5 rounded-full shadow-2xl flex items-center gap-2 text-sm transition-all hover:scale-105">
+  <i class="fas fa-file-contract"></i>
+  <span>Free Quote</span>
+</a>
+
+<!-- ═══════════════════════════════════════════════════════════
+     EXIT INTENT POPUP
+═══════════════════════════════════════════════════════════ -->
+<div id="exit-popup" class="fixed inset-0 z-50 flex items-center justify-center p-6 hidden">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closePopup()"></div>
+
+  <!-- Card -->
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+    <div class="relative">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=700&q=80&auto=format&fit=crop"
+           alt="Construction" class="w-full h-40 object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 to-transparent"></div>
+      <div class="absolute bottom-4 left-6 text-white">
+        <div class="text-xs font-semibold bg-orange-500 px-3 py-1 rounded-full inline-block mb-1">Limited Time</div>
+        <div class="font-black text-xl">Don't Leave Yet!</div>
+      </div>
+      <button onclick="closePopup()"
+              class="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-colors">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+    </div>
+
+    <div class="p-8 text-center">
+      <h3 class="text-2xl font-black text-gray-900 mb-3">
+        Get a <span class="text-orange-500">Free</span> Construction Estimate Today
+      </h3>
+      <p class="text-gray-500 mb-6 text-sm leading-relaxed">
+        Before you go — get a no-obligation quote from our expert team. Takes 2 minutes. Response within 24 hours.
+      </p>
+
+      <form onsubmit="handlePopupSubmit(event)" class="space-y-3 text-left">
+        <input type="text" placeholder="Your Full Name" required
+               class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+        <input type="tel" placeholder="Phone Number" required
+               class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all" />
+        <button type="submit"
+                class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl text-sm transition-all hover:scale-[1.02] shadow-lg shadow-orange-500/30">
+          <i class="fas fa-paper-plane mr-2"></i>
+          Send My Free Estimate Request
+        </button>
+      </form>
+
+      <button onclick="closePopup()" class="text-xs text-gray-400 hover:text-gray-600 transition-colors mt-4 block mx-auto">
+        No thanks, I'll pass on the free estimate
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+<script>
+  // ── Navbar scroll effect ──────────────────────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // ── Mobile menu ───────────────────────────────────────────
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.add('hidden');
+  }
+
+  // ── Intersection Observer for scroll animations ───────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up, .fade-in, .scale-in').forEach(el => observer.observe(el));
+
+  // Stagger children delays
+  document.querySelectorAll('.scale-in').forEach((el, i) => {
+    if (!el.style.transitionDelay) {
+      el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+    }
+  });
+
+  // ── Estimate form handler ─────────────────────────────────
+  function handleEstimateSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('estimate-form');
+    const success = document.getElementById('estimate-success');
+    form.classList.add('opacity-0', 'pointer-events-none');
+    setTimeout(() => {
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+      success.classList.add('opacity-0');
+      setTimeout(() => success.classList.remove('opacity-0'), 50);
+    }, 300);
+    /*
+      INTEGRATION POINT — on real deploy, replace the above with:
+      const data = new FormData(e.target);
+      fetch('https://your-n8n-instance/webhook/estimate-lead', {
+        method: 'POST', body: JSON.stringify(Object.fromEntries(data)),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      // GHL: POST to https://rest.gohighlevel.com/v1/contacts/ with API key
+      // HubSpot: POST to https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formGuid}
+    */
+  }
+
+  // ── Booking form handler ──────────────────────────────────
+  function handleBookingSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('booking-form');
+    const success = document.getElementById('booking-success');
+    form.classList.add('opacity-0', 'pointer-events-none');
+    setTimeout(() => {
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    }, 300);
+    /*
+      INTEGRATION POINT:
+      // Trigger n8n workflow to:
+      // 1. Create Google Calendar event
+      // 2. Send confirmation email (SendGrid/SMTP)
+      // 3. Send SMS reminder (Twilio)
+      // 4. Create CRM contact (GHL/HubSpot)
+    */
+  }
+
+  // ── Popup form handler ────────────────────────────────────
+  function handlePopupSubmit(e) {
+    e.preventDefault();
+    closePopup();
+    // Show a brief toast or redirect to estimate section
+    alert('Thank you! We\'ll be in touch within 24 hours.');
+  }
+
+  // ── Exit intent popup ─────────────────────────────────────
+  let popupShown = sessionStorage.getItem('popupShown');
+  let mouseLeaveTimer;
+
+  if (!popupShown) {
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0) {
+        mouseLeaveTimer = setTimeout(() => {
+          document.getElementById('exit-popup').classList.remove('hidden');
+          document.getElementById('exit-popup').style.opacity = '0';
+          setTimeout(() => {
+            document.getElementById('exit-popup').style.opacity = '1';
+          }, 50);
+        }, 200);
+      }
+    });
+
+    // Also show on mobile after 45 seconds of inactivity
+    setTimeout(() => {
+      if (!sessionStorage.getItem('popupShown')) showPopup();
+    }, 45000);
+  }
+
+  function showPopup() {
+    if (!sessionStorage.getItem('popupShown')) {
+      document.getElementById('exit-popup').classList.remove('hidden');
+    }
+  }
+
+  function closePopup() {
+    const popup = document.getElementById('exit-popup');
+    popup.style.opacity = '0';
+    setTimeout(() => popup.classList.add('hidden'), 400);
+    sessionStorage.setItem('popupShown', 'true');
+  }
+
+  // ── Sticky CTA visibility ─────────────────────────────────
+  const stickyCta = document.getElementById('sticky-cta');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) {
+      stickyCta.style.transform = 'scale(1)';
+      stickyCta.style.opacity = '1';
+    } else {
+      stickyCta.style.opacity = '0';
+      stickyCta.style.transform = 'scale(0.8)';
+    }
+  });
+  stickyCta.style.opacity = '0';
+  stickyCta.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+  // ── Calendar day selection ────────────────────────────────
+  document.querySelectorAll('[class*="cursor-pointer"]').forEach(day => {
+    day.addEventListener('click', function() {
+      document.querySelectorAll('[class*="cursor-pointer"]').forEach(d => {
+        d.classList.remove('bg-orange-500', 'font-bold');
+        d.classList.add('bg-white/10');
+      });
+      this.classList.remove('bg-white/10');
+      this.classList.add('bg-orange-500', 'font-bold');
+    });
+  });
+
+  // ── Smooth scroll polyfill fallback ──────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

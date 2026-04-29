@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transform Your Body in 90 Days | EliteFit Pro Coaching</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#16a34a',
+            'primary-dark': '#15803d',
+            accent: '#ea580c',
+            dark: '#0a0a0a',
+            'dark-2': '#111111',
+            'dark-3': '#1a1a1a',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .gradient-text {
+      background: linear-gradient(135deg, #16a34a, #ea580c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-overlay {
+      background: linear-gradient(to right, rgba(0,0,0,0.88) 55%, rgba(0,0,0,0.45) 100%);
+    }
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+    .btn-primary {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(22,163,74,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(22,163,74,0.6); }
+    .btn-accent {
+      background: linear-gradient(135deg, #ea580c, #f97316);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(234,88,12,0.4);
+    }
+    .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234,88,12,0.6); }
+    .sticky-cta {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      animation: pulse-ring 2s infinite;
+    }
+    @keyframes pulse-ring {
+      0%,100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.7); }
+      50% { box-shadow: 0 0 0 12px rgba(22,163,74,0); }
+    }
+    .section-fade { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .section-fade.visible { opacity: 1; transform: translateY(0); }
+    #exit-popup { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); }
+    #exit-popup.show { display: flex; }
+    .image-gallery img { transition: transform 0.4s ease; }
+    .image-gallery img:hover { transform: scale(1.05); }
+    .cal-day { cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .cal-day:hover { background: #16a34a; color: #fff; border-radius: 8px; }
+    .cal-day.selected { background: #16a34a; color: #fff; border-radius: 8px; }
+    .cal-day.disabled { color: #444; cursor: default; }
+    .cal-day.disabled:hover { background: transparent; color: #444; }
+    input:focus, select:focus, textarea:focus {
+      border-color: #16a34a !important;
+      box-shadow: 0 0 0 2px rgba(22,163,74,0.2);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-white font-sans">
+
+<!-- STICKY CTA -->
+<a href="#booking" class="sticky-cta btn-primary px-5 py-3 rounded-full text-white font-bold text-sm inline-flex items-center gap-2 no-underline">
+  <i class="fas fa-calendar-check"></i> Book Free Call
+</a>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-[#16a34a] rounded-lg flex items-center justify-center">
+        <i class="fas fa-dumbbell text-white text-sm"></i>
+      </div>
+      <span class="font-bold text-lg">EliteFit <span class="text-[#16a34a]">Pro</span></span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm text-gray-300">
+      <a href="#services" class="hover:text-white transition">Services</a>
+      <a href="#testimonials" class="hover:text-white transition">Results</a>
+      <a href="#transformations" class="hover:text-white transition">Transformations</a>
+      <a href="#booking" class="hover:text-white transition">Book</a>
+    </div>
+    <a href="#lead-magnet" class="btn-primary px-4 py-2 rounded-lg text-white font-semibold text-sm no-underline">
+      Free Plan &rarr;
+    </a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     1. HERO SECTION
+═══════════════════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-center pt-16" id="hero">
+  <div class="absolute inset-0 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80"
+         alt="Gym" class="w-full h-full object-cover object-center" />
+    <div class="hero-overlay absolute inset-0"></div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 bg-[#16a34a]/20 border border-[#16a34a]/40 rounded-full px-4 py-1.5 text-sm text-green-400 mb-6">
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        Limited Spots — Join 500+ Transformed Clients
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
+        Transform Your Body in
+        <span class="gradient-text"> 90 Days</span>
+        Without Starving or Spending Hours in the Gym
+      </h1>
+      <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+        A science-backed system used by 500+ clients to burn fat, build lean muscle, and feel genuinely confident — with workouts under 45 minutes and meals you actually enjoy.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#lead-magnet" class="btn-primary px-8 py-4 rounded-xl text-white font-bold text-lg text-center no-underline">
+          Get My Free Fitness Plan &rarr;
+        </a>
+        <a href="#booking" class="border border-white/30 hover:border-white px-8 py-4 rounded-xl text-white font-semibold text-lg text-center transition no-underline">
+          Book Free Consultation
+        </a>
+      </div>
+      <div class="flex flex-wrap items-center gap-6 mt-8 text-sm text-gray-400">
+        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-[#16a34a]"></i> No equipment needed</span>
+        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-[#16a34a]"></i> All fitness levels</span>
+        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-[#16a34a]"></i> Results guaranteed</span>
+      </div>
+    </div>
+
+    <!-- Stats card -->
+    <div class="hidden md:block">
+      <div class="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-6 space-y-4">
+        <h3 class="font-bold text-lg text-center mb-4">Client Results at a Glance</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-[#111] rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-[#16a34a]">500+</div>
+            <div class="text-xs text-gray-400 mt-1">Clients Transformed</div>
+          </div>
+          <div class="bg-[#111] rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-[#ea580c]">90</div>
+            <div class="text-xs text-gray-400 mt-1">Days to Results</div>
+          </div>
+          <div class="bg-[#111] rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-[#16a34a]">4.9★</div>
+            <div class="text-xs text-gray-400 mt-1">Average Rating</div>
+          </div>
+          <div class="bg-[#111] rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-[#ea580c]">45m</div>
+            <div class="text-xs text-gray-400 mt-1">Max Workout Time</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-[#16a34a]/10 rounded-xl p-3 border border-[#16a34a]/20">
+          <img src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?w=60&q=80"
+               class="w-10 h-10 rounded-full object-cover" alt="Coach Marcus" />
+          <div>
+            <div class="font-semibold text-sm">Coach Marcus Rivera</div>
+            <div class="text-xs text-gray-400">NASM Certified · 10+ Years Experience</div>
+          </div>
+          <div class="ml-auto text-yellow-400 text-xs">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="bg-[#111] border-y border-white/10 py-5">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="flex flex-wrap justify-center gap-6 md:gap-10 text-sm text-gray-400">
+      <span class="flex items-center gap-2"><i class="fas fa-shield-alt text-[#16a34a]"></i> NASM Certified</span>
+      <span class="flex items-center gap-2"><i class="fas fa-trophy text-[#16a34a]"></i> 500+ Success Stories</span>
+      <span class="flex items-center gap-2"><i class="fas fa-star text-yellow-400"></i> 4.9/5 Google Reviews</span>
+      <span class="flex items-center gap-2"><i class="fas fa-clock text-[#16a34a]"></i> 10+ Years Experience</span>
+      <span class="flex items-center gap-2"><i class="fas fa-lock text-[#16a34a]"></i> 30-Day Money Back</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     2. LEAD MAGNET SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="lead-magnet" class="py-20 bg-[#0a0a0a] section-fade">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-[#ea580c] font-semibold uppercase text-sm tracking-widest">Free Download</span>
+      <h2 class="text-3xl md:text-4xl font-black mt-2 mb-3">
+        Grab Your <span class="gradient-text">Free Fitness Starter Kit</span>
+      </h2>
+      <p class="text-gray-400 text-lg max-w-xl mx-auto">
+        Everything you need to kick-start your transformation — completely free. No credit card, no gimmicks.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <!-- What's included -->
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 bg-[#111] rounded-xl p-4 border border-white/10 card-hover">
+          <div class="w-12 h-12 bg-[#16a34a]/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-utensils text-[#16a34a] text-lg"></i>
+          </div>
+          <div>
+            <h3 class="font-bold">7-Day Fat Loss Meal Plan (PDF)</h3>
+            <p class="text-sm text-gray-400 mt-1">Delicious, high-protein recipes that keep you full and burn fat — no rabbit food required.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-[#111] rounded-xl p-4 border border-white/10 card-hover">
+          <div class="w-12 h-12 bg-[#ea580c]/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-dumbbell text-[#ea580c] text-lg"></i>
+          </div>
+          <div>
+            <h3 class="font-bold">Home Workout Routine</h3>
+            <p class="text-sm text-gray-400 mt-1">A full 4-week plan you can do with zero equipment in 30 minutes or less — any day, anywhere.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-[#111] rounded-xl p-4 border border-white/10 card-hover">
+          <div class="w-12 h-12 bg-[#16a34a]/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-book-open text-[#16a34a] text-lg"></i>
+          </div>
+          <div>
+            <h3 class="font-bold">Beginner Fat Loss Guide</h3>
+            <p class="text-sm text-gray-400 mt-1">The science of fat loss explained simply — understand exactly what works and why.</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-500 flex items-center gap-2 pl-2">
+          <i class="fas fa-lock text-[#16a34a] text-xs"></i>
+          100% Private — We never share or sell your info
+        </p>
+      </div>
+
+      <!-- Lead form -->
+      <div class="bg-[#1a1a1a] rounded-2xl p-6 md:p-8 border border-white/10">
+        <h3 class="text-xl font-bold mb-1">Get Instant Access</h3>
+        <p class="text-gray-400 text-sm mb-6">Fill in below and we'll send your free kit immediately.</p>
+        <form id="lead-form" class="space-y-4" onsubmit="handleLeadForm(event)">
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Full Name</label>
+            <input type="text" placeholder="John Smith" required
+              class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Email Address</label>
+            <input type="email" placeholder="john@example.com" required
+              class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Primary Fitness Goal</label>
+            <select required class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white transition">
+              <option value="" disabled selected>Select your goal...</option>
+              <option>Lose Fat &amp; Get Lean</option>
+              <option>Build Muscle &amp; Strength</option>
+              <option>Tone &amp; Define My Body</option>
+              <option>Improve Endurance &amp; Energy</option>
+              <option>General Health &amp; Wellness</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold text-white text-lg">
+            Download Now — It's FREE &rarr;
+          </button>
+        </form>
+        <div id="lead-success" class="hidden text-center py-8">
+          <div class="w-16 h-16 bg-[#16a34a]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-check text-[#16a34a] text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg">You're in! Check your inbox.</h3>
+          <p class="text-gray-400 text-sm mt-1">Your free fitness kit is on its way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     3. VISUAL IMAGE GALLERY
+═══════════════════════════════════════════════════════════ -->
+<section class="py-16 bg-[#111]" id="gallery">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl md:text-3xl font-black mb-2">Your New Lifestyle Awaits</h2>
+      <p class="text-gray-400">Real training. Real food. Real results.</p>
+    </div>
+    <div class="image-gallery grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="overflow-hidden rounded-xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Gym Training" class="w-full h-full object-cover" />
+      </div>
+      <div class="overflow-hidden rounded-xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80" alt="Healthy Meal Prep" class="w-full h-full object-cover" />
+      </div>
+      <div class="overflow-hidden rounded-xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80" alt="Workout" class="w-full h-full object-cover" />
+      </div>
+      <div class="overflow-hidden rounded-xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80" alt="Meal Prep" class="w-full h-full object-cover" />
+      </div>
+      <div class="overflow-hidden rounded-xl aspect-square md:col-span-2">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Home Workout" class="w-full h-full object-cover" />
+      </div>
+      <div class="overflow-hidden rounded-xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80" alt="Healthy Food" class="w-full h-full object-cover" />
+      </div>
+      <div class="overflow-hidden rounded-xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400&q=80" alt="Dumbbells" class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     4. SERVICES SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="services" class="py-20 bg-[#0a0a0a] section-fade">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <span class="text-[#16a34a] font-semibold uppercase text-sm tracking-widest">What We Offer</span>
+      <h2 class="text-3xl md:text-4xl font-black mt-2 mb-3">
+        Everything You Need to <span class="gradient-text">Succeed</span>
+      </h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        Choose the coaching path that fits your lifestyle. Every program is fully customized to you.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-[#111] rounded-2xl p-6 border border-white/10 card-hover group">
+        <div class="w-14 h-14 bg-[#16a34a]/20 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-[#16a34a]/30 transition">
+          <i class="fas fa-user-check text-[#16a34a] text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">1-on-1 Coaching</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Direct access to your coach via app and video calls. Personalized feedback every step of the way.</p>
+      </div>
+      <div class="bg-[#111] rounded-2xl p-6 border border-white/10 card-hover group">
+        <div class="w-14 h-14 bg-[#ea580c]/20 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-[#ea580c]/30 transition">
+          <i class="fas fa-clipboard-list text-[#ea580c] text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Custom Workout Plans</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Programs built around your schedule, equipment, and goals. No cookie-cutter routines — ever.</p>
+      </div>
+      <div class="bg-[#111] rounded-2xl p-6 border border-white/10 card-hover group">
+        <div class="w-14 h-14 bg-[#16a34a]/20 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-[#16a34a]/30 transition">
+          <i class="fas fa-apple-alt text-[#16a34a] text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Nutrition Coaching</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Custom meal plans and macro targets that fit your taste buds and budget. No crash diets.</p>
+      </div>
+      <div class="bg-[#111] rounded-2xl p-6 border border-white/10 card-hover group">
+        <div class="w-14 h-14 bg-[#ea580c]/20 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-[#ea580c]/30 transition">
+          <i class="fas fa-sync-alt text-[#ea580c] text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Weekly Check-ins</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Consistent accountability through progress reviews, plan adjustments, and motivational support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     5. TESTIMONIALS
+═══════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="py-20 bg-[#111] section-fade">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <span class="text-[#16a34a] font-semibold uppercase text-sm tracking-widest">Client Reviews</span>
+      <h2 class="text-3xl md:text-4xl font-black mt-2 mb-2">Real People, Real Results</h2>
+      <div class="flex items-center justify-center gap-2 mt-3">
+        <span class="text-yellow-400">★★★★★</span>
+        <span class="text-gray-400 text-sm">4.9 / 5 from 200+ Google Reviews</span>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Review 1 -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&q=80" class="w-12 h-12 rounded-full object-cover" alt="Jason" />
+          <div>
+            <div class="font-semibold">Jason M.</div>
+            <div class="text-xs text-gray-500">Verified Google Review</div>
+          </div>
+          <i class="fab fa-google text-blue-400 ml-auto"></i>
+        </div>
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <p class="text-gray-300 text-sm leading-relaxed">"Lost 28 lbs in 90 days with Marcus's program. The meal plans didn't feel restrictive at all — I was eating amazing food and still dropping fat every week. Best investment I've ever made."</p>
+        <div class="mt-4 text-xs text-[#16a34a] font-semibold">Lost 28 lbs in 90 days</div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&q=80" class="w-12 h-12 rounded-full object-cover" alt="Samantha" />
+          <div>
+            <div class="font-semibold">Samantha R.</div>
+            <div class="text-xs text-gray-500">Verified Google Review</div>
+          </div>
+          <i class="fab fa-google text-blue-400 ml-auto"></i>
+        </div>
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <p class="text-gray-300 text-sm leading-relaxed">"As a busy mom of two I thought I'd never get in shape. Marcus built me a 30-min home plan and I dropped 3 dress sizes in 3 months. I feel like a completely different person!"</p>
+        <div class="mt-4 text-xs text-[#16a34a] font-semibold">Dropped 3 dress sizes in 12 weeks</div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&q=80" class="w-12 h-12 rounded-full object-cover" alt="Derek" />
+          <div>
+            <div class="font-semibold">Derek T.</div>
+            <div class="text-xs text-gray-500">Verified Google Review</div>
+          </div>
+          <i class="fab fa-google text-blue-400 ml-auto"></i>
+        </div>
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <p class="text-gray-300 text-sm leading-relaxed">"I was skeptical about online coaching but Marcus proved me wrong. Weekly check-ins kept me on track. Gained 12 lbs of muscle in 4 months and feel stronger than ever at 38."</p>
+        <div class="mt-4 text-xs text-[#16a34a] font-semibold">Gained 12 lbs of muscle in 4 months</div>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=60&q=80" class="w-12 h-12 rounded-full object-cover" alt="Priya" />
+          <div>
+            <div class="font-semibold">Priya K.</div>
+            <div class="text-xs text-gray-500">Verified Google Review</div>
+          </div>
+          <i class="fab fa-google text-blue-400 ml-auto"></i>
+        </div>
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <p class="text-gray-300 text-sm leading-relaxed">"The nutrition coaching completely changed my relationship with food. I stopped obsessing and started fueling. Down 20 lbs and running my first 5K next month!"</p>
+        <div class="mt-4 text-xs text-[#16a34a] font-semibold">Lost 20 lbs + running 5Ks</div>
+      </div>
+
+      <!-- Review 5 -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=60&q=80" class="w-12 h-12 rounded-full object-cover" alt="Carlos" />
+          <div>
+            <div class="font-semibold">Carlos B.</div>
+            <div class="text-xs text-gray-500">Verified Google Review</div>
+          </div>
+          <i class="fab fa-google text-blue-400 ml-auto"></i>
+        </div>
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <p class="text-gray-300 text-sm leading-relaxed">"Marcus teaches you HOW to train and eat for life. The education is what separates EliteFit from everything else I've tried. Results: –22 lbs, –4 inches off my waist."</p>
+        <div class="mt-4 text-xs text-[#16a34a] font-semibold">Lost 22 lbs and 4 inches off waist</div>
+      </div>
+
+      <!-- Review 6 -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-[#16a34a]/30 card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&q=80" class="w-12 h-12 rounded-full object-cover" alt="Aisha" />
+          <div>
+            <div class="font-semibold">Aisha W.</div>
+            <div class="text-xs text-gray-500">Verified Google Review</div>
+          </div>
+          <i class="fab fa-google text-blue-400 ml-auto"></i>
+        </div>
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <p class="text-gray-300 text-sm leading-relaxed">"I've tried every fad diet out there. This is the first program where I actually understand what I'm doing and why. Lost 15 lbs and finally have energy to play with my kids. Game changer."</p>
+        <div class="mt-4 text-xs text-[#16a34a] font-semibold">Lost 15 lbs + boosted daily energy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     6. TRANSFORMATION SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="transformations" class="py-20 bg-[#0a0a0a] section-fade">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <span class="text-[#ea580c] font-semibold uppercase text-sm tracking-widest">Transformations</span>
+      <h2 class="text-3xl md:text-4xl font-black mt-2 mb-3">
+        See What's <span class="gradient-text">Possible in 90 Days</span>
+      </h2>
+      <p class="text-gray-400">Real clients. Real results. No tricks, no editing.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="card-hover">
+        <div class="flex gap-2 rounded-2xl overflow-hidden h-56">
+          <div class="relative flex-1">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80" class="w-full h-full object-cover" alt="Before" />
+            <span class="absolute top-2 left-2 bg-black/80 text-xs px-2 py-0.5 rounded font-semibold">BEFORE</span>
+          </div>
+          <div class="relative flex-1">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&q=80" class="w-full h-full object-cover" alt="After" />
+            <span class="absolute top-2 left-2 bg-[#16a34a]/90 text-xs px-2 py-0.5 rounded font-semibold">AFTER</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="font-bold">Marcus, 34</div>
+          <div class="text-[#16a34a] text-sm font-semibold">Lost 31 lbs in 90 Days</div>
+          <p class="text-gray-400 text-sm mt-1">"Never thought I'd see abs at 34. The program was sustainable — no crash dieting."</p>
+        </div>
+      </div>
+
+      <div class="card-hover">
+        <div class="flex gap-2 rounded-2xl overflow-hidden h-56">
+          <div class="relative flex-1">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&q=80" class="w-full h-full object-cover" alt="Before" />
+            <span class="absolute top-2 left-2 bg-black/80 text-xs px-2 py-0.5 rounded font-semibold">BEFORE</span>
+          </div>
+          <div class="relative flex-1">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&q=80" class="w-full h-full object-cover" alt="After" />
+            <span class="absolute top-2 left-2 bg-[#16a34a]/90 text-xs px-2 py-0.5 rounded font-semibold">AFTER</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="font-bold">Tara, 28</div>
+          <div class="text-[#16a34a] text-sm font-semibold">Dropped 2 Dress Sizes</div>
+          <p class="text-gray-400 text-sm mt-1">"Finally feel comfortable in my own skin. Weekly check-ins kept me accountable."</p>
+        </div>
+      </div>
+
+      <div class="card-hover">
+        <div class="flex gap-2 rounded-2xl overflow-hidden h-56">
+          <div class="relative flex-1">
+            <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=300&q=80" class="w-full h-full object-cover" alt="Before" />
+            <span class="absolute top-2 left-2 bg-black/80 text-xs px-2 py-0.5 rounded font-semibold">BEFORE</span>
+          </div>
+          <div class="relative flex-1">
+            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&q=80" class="w-full h-full object-cover" alt="After" />
+            <span class="absolute top-2 left-2 bg-[#16a34a]/90 text-xs px-2 py-0.5 rounded font-semibold">AFTER</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="font-bold">Ray, 42</div>
+          <div class="text-[#16a34a] text-sm font-semibold">Built 14 lbs of Lean Muscle</div>
+          <p class="text-gray-400 text-sm mt-1">"At 42 I'm in the best shape of my life. Thought that ship had sailed — it hadn't."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     7. BOOKING SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="booking" class="py-20 bg-[#111] section-fade">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-[#16a34a] font-semibold uppercase text-sm tracking-widest">Free Strategy Session</span>
+      <h2 class="text-3xl md:text-4xl font-black mt-2 mb-3">
+        Book Your <span class="gradient-text">Free Consultation</span>
+      </h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        30 minutes. Zero pressure. Walk away with a clear roadmap to your goals — whether you join or not.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Calendar -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-lg">Select a Date</h3>
+          <div class="flex gap-2">
+            <button onclick="prevMonth()" class="w-8 h-8 rounded-lg border border-white/10 hover:border-[#16a34a] flex items-center justify-center text-sm transition">&lsaquo;</button>
+            <button onclick="nextMonth()" class="w-8 h-8 rounded-lg border border-white/10 hover:border-[#16a34a] flex items-center justify-center text-sm transition">&rsaquo;</button>
+          </div>
+        </div>
+        <div id="calendar-month" class="text-center text-[#16a34a] font-semibold mb-4"></div>
+        <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-500 mb-2">
+          <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+        </div>
+        <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-center text-sm"></div>
+
+        <div class="mt-6">
+          <h4 class="font-semibold text-sm mb-3">Available Times</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <button class="time-slot bg-[#111] hover:bg-[#16a34a]/20 border border-white/10 hover:border-[#16a34a] rounded-lg py-2 text-sm transition" onclick="selectTime(this)">9:00 AM</button>
+            <button class="time-slot bg-[#111] hover:bg-[#16a34a]/20 border border-white/10 hover:border-[#16a34a] rounded-lg py-2 text-sm transition" onclick="selectTime(this)">10:30 AM</button>
+            <button class="time-slot bg-[#111] hover:bg-[#16a34a]/20 border border-white/10 hover:border-[#16a34a] rounded-lg py-2 text-sm transition" onclick="selectTime(this)">12:00 PM</button>
+            <button class="time-slot bg-[#111] hover:bg-[#16a34a]/20 border border-white/10 hover:border-[#16a34a] rounded-lg py-2 text-sm transition" onclick="selectTime(this)">2:00 PM</button>
+            <button class="time-slot bg-[#111] hover:bg-[#16a34a]/20 border border-white/10 hover:border-[#16a34a] rounded-lg py-2 text-sm transition" onclick="selectTime(this)">3:30 PM</button>
+            <button class="time-slot bg-[#111] hover:bg-[#16a34a]/20 border border-white/10 hover:border-[#16a34a] rounded-lg py-2 text-sm transition" onclick="selectTime(this)">5:00 PM</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking form -->
+      <div class="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10">
+        <h3 class="font-bold text-lg mb-1">Your Details</h3>
+        <p class="text-gray-400 text-sm mb-6">We'll confirm your appointment via email and SMS.</p>
+        <form id="booking-form" class="space-y-4" onsubmit="handleBooking(event)">
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Full Name *</label>
+            <input type="text" placeholder="John Smith" required
+              class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Email Address *</label>
+            <input type="email" placeholder="john@example.com" required
+              class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Phone Number *</label>
+            <input type="tel" placeholder="+1 (555) 000-0000" required
+              class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Primary Goal</label>
+            <select class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white transition">
+              <option value="" disabled selected>Select your goal...</option>
+              <option>Lose Fat &amp; Get Lean</option>
+              <option>Build Muscle &amp; Strength</option>
+              <option>Tone &amp; Define My Body</option>
+              <option>Improve Endurance</option>
+              <option>General Health</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-300 mb-1.5">Anything to discuss? <span class="text-gray-600">(optional)</span></label>
+            <textarea rows="2" placeholder="Share any details that would help us prepare..."
+              class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-accent w-full py-4 rounded-xl font-bold text-white text-lg">
+            Book Your Free Consultation &rarr;
+          </button>
+          <p class="text-xs text-gray-500 text-center">No cost. No commitment. Just a real conversation about your goals.</p>
+        </form>
+        <div id="booking-success" class="hidden text-center py-10">
+          <div class="w-16 h-16 bg-[#16a34a]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-calendar-check text-[#16a34a] text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-xl">You're booked!</h3>
+          <p class="text-gray-400 text-sm mt-2">Check your email and SMS for confirmation. We look forward to speaking with you!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     8. FINAL CTA
+═══════════════════════════════════════════════════════════ -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&q=80" class="w-full h-full object-cover" alt="Fitness" />
+    <div class="absolute inset-0 bg-[#0a0a0a]/85"></div>
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto px-4 text-center">
+    <span class="text-[#16a34a] font-semibold uppercase text-sm tracking-widest">Your Move</span>
+    <h2 class="text-4xl md:text-5xl font-black mt-3 mb-6">
+      Ready to Start Your <span class="gradient-text">Fitness Journey?</span>
+    </h2>
+    <p class="text-gray-300 text-lg mb-10 leading-relaxed">
+      Join 500+ clients who stopped making excuses and started making progress. Your transformation is one decision away.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#lead-magnet" class="btn-primary px-10 py-4 rounded-xl font-bold text-white text-lg text-center no-underline">
+        Get Free Fitness Plan
+      </a>
+      <a href="#booking" class="btn-accent px-10 py-4 rounded-xl font-bold text-white text-lg text-center no-underline">
+        Book Free Call Today
+      </a>
+    </div>
+    <p class="text-gray-500 text-sm mt-6">Limited spots available. Don't wait — your future self will thank you.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#1a1a1a] border-t border-white/10 py-8">
+  <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 bg-[#16a34a] rounded-lg flex items-center justify-center">
+        <i class="fas fa-dumbbell text-white text-xs"></i>
+      </div>
+      <span class="font-bold">EliteFit Pro</span>
+    </div>
+    <div class="text-gray-500 text-sm">&copy; 2026 EliteFit Pro. All rights reserved.</div>
+    <div class="flex gap-4 text-sm text-gray-500">
+      <a href="#" class="hover:text-white transition">Privacy</a>
+      <a href="#" class="hover:text-white transition">Terms</a>
+      <a href="#" class="hover:text-white transition">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     EXIT INTENT POPUP
+═══════════════════════════════════════════════════════════ -->
+<div id="exit-popup" class="items-center justify-center p-4">
+  <div class="bg-[#1a1a1a] rounded-2xl p-8 max-w-md w-full border border-[#16a34a]/30 relative shadow-2xl">
+    <button onclick="closePopup()" class="absolute top-4 right-4 text-gray-500 hover:text-white text-xl leading-none">&times;</button>
+    <div class="text-center">
+      <div class="w-16 h-16 bg-[#16a34a]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-gift text-[#16a34a] text-2xl"></i>
+      </div>
+      <h3 class="text-2xl font-black mb-2">Wait! Don't Leave Empty-Handed</h3>
+      <p class="text-gray-400 text-sm mb-6">Grab your FREE 7-Day Fat Loss Meal Plan before you go. Over 500 people used it to kick-start their transformation.</p>
+      <form onsubmit="handleExitPopup(event)" class="space-y-3">
+        <input type="email" placeholder="Your best email address" required
+          class="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition" />
+        <button type="submit" class="btn-primary w-full py-3 rounded-xl font-bold text-white">
+          Yes! Send Me the Free Meal Plan &rarr;
+        </button>
+      </form>
+      <p class="text-xs text-gray-600 mt-3">No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════ -->
+<script>
+  // ── Scroll fade-in ─────────────────────────────────────────
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.section-fade').forEach(el => observer.observe(el));
+
+  // ── Lead magnet form ───────────────────────────────────────
+  function handleLeadForm(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+      name:  form.querySelector('[type=text]').value,
+      email: form.querySelector('[type=email]').value,
+      goal:  form.querySelector('select').value,
+      source: 'lead-magnet',
+      timestamp: new Date().toISOString()
+    };
+
+    /*
+     * INTEGRATION — Email Automation (n8n or any webhook)
+     *
+     * fetch('https://YOUR_N8N/webhook/lead-magnet', {
+     *   method: 'POST',
+     *   headers: { 'Content-Type': 'application/json' },
+     *   body: JSON.stringify(data)
+     * });
+     *
+     * n8n workflow:
+     *   1. Add contact to Mailchimp / ActiveCampaign / ConvertKit
+     *   2. Send welcome email with PDF attachment
+     *   3. Trigger 7-day drip sequence
+     *   4. SMS via Twilio: "Hey {name}! Your free meal plan is in your inbox 🎉"
+     */
+
+    form.style.display = 'none';
+    document.getElementById('lead-success').classList.remove('hidden');
+  }
+
+  // ── Booking form ───────────────────────────────────────────
+  function handleBooking(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+      name:  form.querySelectorAll('input')[0].value,
+      email: form.querySelectorAll('input')[1].value,
+      phone: form.querySelectorAll('input')[2].value,
+      goal:  form.querySelector('select').value,
+      notes: form.querySelector('textarea').value,
+      date:  selectedDay,
+      time:  selectedTime,
+      source: 'booking-form',
+      timestamp: new Date().toISOString()
+    };
+
+    /*
+     * INTEGRATION — Booking + SMS confirmation (n8n webhook)
+     *
+     * fetch('https://YOUR_N8N/webhook/booking', {
+     *   method: 'POST',
+     *   headers: { 'Content-Type': 'application/json' },
+     *   body: JSON.stringify(data)
+     * });
+     *
+     * n8n workflow:
+     *   1. Create event in Google Calendar via Calendar node
+     *   2. Send confirmation email with Zoom/Meet link
+     *   3. SMS via Twilio: "Hey {name}, your free consult is confirmed for {date} at {time}!"
+     *   4. Add lead to CRM (HubSpot / GoHighLevel / Notion)
+     *   5. Reminder SMS: 24 hrs before + 1 hr before appointment
+     */
+
+    form.style.display = 'none';
+    document.getElementById('booking-success').classList.remove('hidden');
+  }
+
+  // ── Exit popup ─────────────────────────────────────────────
+  function handleExitPopup(e) {
+    e.preventDefault();
+    /*
+     * INTEGRATION — Re-engagement sequence
+     * POST e.target.querySelector('input').value to your webhook
+     * to enroll in a re-engagement drip campaign.
+     */
+    closePopup();
+  }
+
+  let popupShown = false;
+  document.addEventListener('mouseleave', e => {
+    if (e.clientY <= 0 && !popupShown) {
+      popupShown = true;
+      document.getElementById('exit-popup').classList.add('show');
+    }
+  });
+
+  function closePopup() {
+    document.getElementById('exit-popup').classList.remove('show');
+  }
+  document.getElementById('exit-popup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+
+  // ── Calendar ───────────────────────────────────────────────
+  const MONTH_NAMES = ['January','February','March','April','May','June',
+                       'July','August','September','October','November','December'];
+  let currentDate = new Date(2026, 4, 1); // May 2026
+  let selectedDay = null;
+  let selectedTime = null;
+
+  function renderCalendar() {
+    const y = currentDate.getFullYear();
+    const m = currentDate.getMonth();
+    document.getElementById('calendar-month').textContent = `${MONTH_NAMES[m]} ${y}`;
+
+    const firstDay    = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
+
+    let html = '';
+    for (let i = 0; i < firstDay; i++) html += '<div></div>';
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date    = new Date(y, m, d);
+      const weekend = date.getDay() === 0 || date.getDay() === 6;
+      const past    = date < todayMidnight;
+      if (weekend || past) {
+        html += `<div class="cal-day disabled py-1.5">${d}</div>`;
+      } else {
+        const sel = selectedDay === d ? 'selected' : '';
+        html += `<div class="cal-day ${sel} py-1.5" onclick="selectDay(${d}, this)">${d}</div>`;
+      }
+    }
+    document.getElementById('calendar-grid').innerHTML = html;
+  }
+
+  function selectDay(d, el) {
+    selectedDay = d;
+    document.querySelectorAll('#calendar-grid .cal-day').forEach(x => x.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function selectTime(btn) {
+    selectedTime = btn.textContent.trim();
+    document.querySelectorAll('.time-slot').forEach(b => {
+      b.classList.remove('bg-[#16a34a]', 'text-white', 'border-[#16a34a]');
+      b.classList.add('bg-[#111]', 'border-white/10');
+    });
+    btn.classList.remove('bg-[#111]', 'border-white/10');
+    btn.classList.add('bg-[#16a34a]', 'text-white', 'border-[#16a34a]');
+  }
+
+  function prevMonth() {
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+    selectedDay = null;
+    renderCalendar();
+  }
+
+  function nextMonth() {
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+    selectedDay = null;
+    renderCalendar();
+  }
+
+  renderCalendar();
+</script>
+</body>
+</html>

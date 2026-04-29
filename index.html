@@ -1042,6 +1042,29 @@
     }
     .rlp-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
     .rlp-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+    /* iframe live preview */
+    .rlp-iframe-wrap {
+      width: 100%; aspect-ratio: 16/10;
+      overflow: hidden; position: relative;
+      background: #fff; border-bottom: 1px solid var(--border);
+    }
+    .rlp-iframe-wrap iframe {
+      width: 200%; height: 200%;
+      transform: scale(0.5); transform-origin: top left;
+      border: none; pointer-events: none;
+    }
+    .rlp-iframe-overlay {
+      position: absolute; inset: 0; z-index: 2; cursor: pointer;
+    }
+    .rlp-live-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 14px; padding: 8px 16px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      background: var(--gradient-hero); color: #fff;
+      transition: all var(--transition);
+    }
+    .rlp-live-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--glow); }
   </style>
 </head>
 <body>
@@ -2570,18 +2593,51 @@
       <!-- Panel: Funnel & Website -->
       <div class="rlp-panel" id="rlp-funnel">
         <div class="rlp-grid">
-          <!-- Funnel/Website project cards will be added here -->
+
+          <!-- Fitness Funnel -->
           <div class="rlp-card reveal">
-            <div class="rlp-photo-placeholder">
-              <i class="fas fa-globe"></i>
-              <span>Projects coming soon</span>
+            <div class="rlp-iframe-wrap">
+              <iframe src="fitness-funnel.html" title="EliteFit Pro Coaching Funnel" loading="lazy" scrolling="no" tabindex="-1"></iframe>
+              <a class="rlp-iframe-overlay" href="fitness-funnel.html" target="_blank" rel="noopener" aria-label="View EliteFit Pro Coaching Funnel"></a>
             </div>
             <div class="rlp-card-body">
-              <span class="rlp-card-tag">Funnel / Website</span>
-              <h3 class="rlp-card-title">Real Funnel &amp; Website Projects</h3>
-              <p class="rlp-card-desc">Screenshots of funnels and websites created for real clients will be displayed here.</p>
+              <span class="rlp-card-tag">Fitness · Sales Funnel</span>
+              <h3 class="rlp-card-title">EliteFit Pro — 90-Day Body Transformation Funnel</h3>
+              <p class="rlp-card-desc">High-converting sales funnel for a fitness coaching brand — features a bold hero with social proof, transformation results, program breakdown, coach bio, FAQ section, and a strong CTA to book a free strategy call. Built to capture and convert cold traffic.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">HTML / CSS</span>
+                <span class="project-tool-tag">Tailwind CSS</span>
+                <span class="project-tool-tag">Sales Funnel</span>
+                <span class="project-tool-tag">Lead Generation</span>
+              </div>
+              <a href="fitness-funnel.html" target="_blank" rel="noopener" class="rlp-live-btn">
+                <i class="fas fa-external-link-alt"></i> View Live Page
+              </a>
             </div>
           </div>
+
+          <!-- Construction Landing Page -->
+          <div class="rlp-card reveal" style="transition-delay:0.1s">
+            <div class="rlp-iframe-wrap">
+              <iframe src="construction-landing.html" title="BuildRight Construction Landing Page" loading="lazy" scrolling="no" tabindex="-1"></iframe>
+              <a class="rlp-iframe-overlay" href="construction-landing.html" target="_blank" rel="noopener" aria-label="View BuildRight Construction Landing Page"></a>
+            </div>
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Construction · Landing Page</span>
+              <h3 class="rlp-card-title">BuildRight Construction — Quality Builds Landing Page</h3>
+              <p class="rlp-card-desc">Professional landing page for a construction company — showcases services, past projects, team credibility, and a contact/quote request form. Designed with a navy and orange color scheme to convey trust, authority, and reliability to prospective clients.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">HTML / CSS</span>
+                <span class="project-tool-tag">Tailwind CSS</span>
+                <span class="project-tool-tag">Landing Page</span>
+                <span class="project-tool-tag">Lead Generation</span>
+              </div>
+              <a href="construction-landing.html" target="_blank" rel="noopener" class="rlp-live-btn">
+                <i class="fas fa-external-link-alt"></i> View Live Page
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
