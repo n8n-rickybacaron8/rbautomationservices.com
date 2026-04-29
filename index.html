@@ -2133,18 +2133,159 @@
       <!-- Panel: n8n Workflows -->
       <div class="rlp-panel active" id="rlp-n8n">
         <div class="rlp-grid">
-          <!-- n8n project cards will be added here -->
+
+          <!-- 1: Short Video Autoposting -->
           <div class="rlp-card reveal">
-            <div class="rlp-photo-placeholder">
-              <i class="fas fa-diagram-project"></i>
-              <span>Projects coming soon</span>
-            </div>
+            <img class="rlp-photo" src="images/n8n/short-video-autoposting.png" alt="Creating Short Videos + Autoposting Workflow" loading="lazy" />
             <div class="rlp-card-body">
-              <span class="rlp-card-tag">n8n</span>
-              <h3 class="rlp-card-title">Real n8n Automation Projects</h3>
-              <p class="rlp-card-desc">Screenshots of live n8n workflows built for real clients will be displayed here.</p>
+              <span class="rlp-card-tag">AI Video · Social Media</span>
+              <h3 class="rlp-card-title">Creating Short Videos + Autoposting</h3>
+              <p class="rlp-card-desc">End-to-end AI video pipeline: generates story prompts on a schedule, creates images via FAL AI, produces video clips, adds voiceover with ElevenLabs, renders the final video with Creatomate, then auto-posts to Instagram, TikTok, and YouTube.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">FAL AI</span>
+                <span class="project-tool-tag">ElevenLabs</span>
+                <span class="project-tool-tag">Creatomate</span>
+                <span class="project-tool-tag">Blotato</span>
+                <span class="project-tool-tag">GPT-4.1</span>
+              </div>
             </div>
           </div>
+
+          <!-- 2: Blotato Social Posting -->
+          <div class="rlp-card reveal" style="transition-delay:0.05s">
+            <img class="rlp-photo" src="images/n8n/blotato-social-posting.png" alt="Blotato Multi-Platform Social Posting Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Social Media · Automation</span>
+              <h3 class="rlp-card-title">Blotato 9-Platform Social Media Posting</h3>
+              <p class="rlp-card-desc">Automated social media scheduler that pulls media from a Google Sheets tracker and Google Drive, then simultaneously posts to 9 platforms: Instagram, Facebook, Threads, TikTok, LinkedIn, X, Bluesky, Pinterest, and YouTube. Marks each post as Done or Error.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">Blotato</span>
+                <span class="project-tool-tag">Google Sheets</span>
+                <span class="project-tool-tag">Google Drive</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3: RE Lead Intake -->
+          <div class="rlp-card reveal" style="transition-delay:0.1s">
+            <img class="rlp-photo" src="images/n8n/re-lead-intake.png" alt="Real Estate Lead Intake & Segmentation Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Real Estate · CRM</span>
+              <h3 class="rlp-card-title">RE: Lead Intake &amp; Segmentation</h3>
+              <p class="rlp-card-desc">Captures real estate leads via an intake form, normalizes all field data, routes by lead type (Buyer / Seller / Renter / Investor / Lease-to-Own), tags each lead in Google Sheets CRM, sends a personalized confirmation email, and triggers the 7-touch drip sequence.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">Google Sheets</span>
+                <span class="project-tool-tag">Gmail</span>
+                <span class="project-tool-tag">n8n Forms</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4: RE Follow-Up Drip -->
+          <div class="rlp-card reveal" style="transition-delay:0.15s">
+            <img class="rlp-photo" src="images/n8n/re-followup-drip.png" alt="Real Estate Multi-Touch Follow-Up Drip Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Real Estate · Email Drip</span>
+              <h3 class="rlp-card-title">RE: 7-Touch Multi-Follow-Up Drip</h3>
+              <p class="rlp-card-desc">Automated 7-step email nurture sequence for real estate leads — immediate welcome, value resource on day 1, social proof on day 2, strong CTA on day 4, market insight on day 5, final push on day 7, and a long-term check-in on day 14.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">Gmail</span>
+                <span class="project-tool-tag">Google Sheets</span>
+                <span class="project-tool-tag">Webhook</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5: RE Appointment Booking -->
+          <div class="rlp-card reveal" style="transition-delay:0.2s">
+            <img class="rlp-photo" src="images/n8n/re-appointment-booking.png" alt="Real Estate Appointment Booking & Confirmation Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Real Estate · Booking</span>
+              <h3 class="rlp-card-title">RE: Appointment Booking &amp; Confirmation</h3>
+              <p class="rlp-card-desc">Dual-trigger booking system — captures appointment requests via webhook, sends a personalized Calendly link, waits 48 hours, and sends a reminder if no booking is made. On confirmed booking, fires a full prep email with meeting details, contact info, and Google Meet link.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">Gmail</span>
+                <span class="project-tool-tag">Calendly</span>
+                <span class="project-tool-tag">Google Sheets</span>
+                <span class="project-tool-tag">Webhook</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6: AI Document Search -->
+          <div class="rlp-card reveal" style="transition-delay:0.25s">
+            <img class="rlp-photo" src="images/n8n/ai-document-search.png" alt="AI Document Search Engine with Supabase Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI · Vector Search</span>
+              <h3 class="rlp-card-title">AI Document Search Engine — Supabase</h3>
+              <p class="rlp-card-desc">Two-pipeline AI system: the ingestion pipeline detects new Google Drive files, converts them to OpenAI vector embeddings, and stores them in Supabase. The query pipeline lets users ask natural language questions and returns accurate, source-grounded answers via an AI Agent.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">Supabase</span>
+                <span class="project-tool-tag">OpenAI GPT-4o</span>
+                <span class="project-tool-tag">Google Drive</span>
+                <span class="project-tool-tag">Embeddings</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7: Invoice Processing -->
+          <div class="rlp-card reveal" style="transition-delay:0.3s">
+            <img class="rlp-photo" src="images/n8n/invoice-processing.png" alt="AI Invoice Processing Automation Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Finance · AI Extraction</span>
+              <h3 class="rlp-card-title">AI-Powered Invoice Processing Automation</h3>
+              <p class="rlp-card-desc">Detects new invoice PDFs in Google Drive, extracts all key fields (vendor, amount, date, line items, payment terms) using GPT-4o, appends structured data to Google Sheets, generates an AI summary, and emails the finance team — all in under 30 seconds.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">OpenAI GPT-4o</span>
+                <span class="project-tool-tag">Google Drive</span>
+                <span class="project-tool-tag">Google Sheets</span>
+                <span class="project-tool-tag">Gmail</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8: Multi AI Agent Telegram -->
+          <div class="rlp-card reveal" style="transition-delay:0.35s">
+            <img class="rlp-photo" src="images/n8n/multi-ai-agent-telegram.png" alt="Multi AI Agent via Telegram Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">AI Agent · Telegram</span>
+              <h3 class="rlp-card-title">Multi-AI Agent — Telegram Powered</h3>
+              <p class="rlp-card-desc">Sophisticated multi-agent system triggered via Telegram text or voice — a Master AI Agent routes tasks to three sub-agents: a Database Agent (Supabase vector search), an Email Agent (Gmail read/write), and a Calendar Agent (Google Calendar). Handles voice via OpenAI Whisper transcription.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">Telegram</span>
+                <span class="project-tool-tag">OpenAI GPT-4o</span>
+                <span class="project-tool-tag">Supabase</span>
+                <span class="project-tool-tag">Gmail</span>
+                <span class="project-tool-tag">Google Calendar</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9: Sales Lead Automation -->
+          <div class="rlp-card reveal" style="transition-delay:0.4s">
+            <img class="rlp-photo" src="images/n8n/sales-lead-automation.png" alt="Sales Lead Automation Workflow" loading="lazy" />
+            <div class="rlp-card-body">
+              <span class="rlp-card-tag">Sales · AI Outreach</span>
+              <h3 class="rlp-card-title">AI-Powered Sales Lead Automation</h3>
+              <p class="rlp-card-desc">Full-cycle pipeline — captures leads from a website form, stores them in Google Sheets, qualifies and scores with an AI Sales Agent, crafts personalized pitch emails, routes to a human for approval, and sends automatically. Rejected drafts loop through a Revision Agent for rewriting.</p>
+              <div class="rlp-tools">
+                <span class="project-tool-tag">n8n</span>
+                <span class="project-tool-tag">OpenAI GPT-4o</span>
+                <span class="project-tool-tag">Google Sheets</span>
+                <span class="project-tool-tag">Gmail</span>
+                <span class="project-tool-tag">Webhook</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
