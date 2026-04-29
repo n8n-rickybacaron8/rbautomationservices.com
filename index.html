@@ -1034,6 +1034,7 @@
       font-size: 48px; color: rgba(255,255,255,0.85);
       filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
     }
+    .rlp-video-wrap video:not([controls]) ~ .rlp-video-play-hint,
     .rlp-card:hover .rlp-video-play-hint { opacity: 0; }
     .rlp-video-grid {
       display: grid;
@@ -1693,7 +1694,7 @@
 
           <div class="rlp-card reveal">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(2).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(2).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1705,7 +1706,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.05s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(3).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(3).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1717,7 +1718,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.1s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(4).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(4).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1729,7 +1730,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.15s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(5).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(5).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1741,7 +1742,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.2s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(7).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(7).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1753,7 +1754,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.25s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(8).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(8).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1765,7 +1766,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.3s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(9).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(9).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1777,7 +1778,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.35s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(16).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(16).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -1789,7 +1790,7 @@
 
           <div class="rlp-card reveal" style="transition-delay:0.4s">
             <div class="rlp-video-wrap">
-              <video src="AI%20Video%20Creation/video%20(18).mp4" muted loop preload="metadata" playsinline></video>
+              <video src="AI%20Video%20Creation/video%20(18).mp4" controls preload="metadata" playsinline></video>
               <div class="rlp-video-play-hint"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="rlp-card-body">
@@ -2771,14 +2772,6 @@
     }, { rootMargin: '-40% 0px -40% 0px' });
 
     sections.forEach(s => navObserver.observe(s));
-
-    /* ---- AI VIDEO HOVER PLAY ---- */
-    document.querySelectorAll('.rlp-video-wrap').forEach(wrap => {
-      const video = wrap.querySelector('video');
-      if (!video) return;
-      wrap.addEventListener('mouseenter', () => video.play());
-      wrap.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
-    });
 
     /* ---- REAL LIFE PROJECTS TABS ---- */
     document.querySelectorAll('.rlp-tab').forEach(tab => {
