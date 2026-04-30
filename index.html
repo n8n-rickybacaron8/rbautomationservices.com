@@ -14,8 +14,6 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Three.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     /* =====================================================
@@ -318,11 +316,58 @@
     }
     .hero-stat-label { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 
-    /* Hero 3D Canvas */
+    /* Hero AI Bot Image */
     .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
-    #hero-canvas {
-      width: 100%; max-width: 520px; height: 520px;
-      border-radius: 24px; display: block;
+    .hero-img-scene {
+      position: relative; width: 100%; max-width: 480px;
+      perspective: 900px;
+    }
+    .hero-img-wrap {
+      position: relative;
+      transform-style: preserve-3d;
+      animation: heroFloat 6s ease-in-out infinite;
+      will-change: transform;
+    }
+    .hero-bot-img {
+      width: 100%; border-radius: 24px; display: block;
+      position: relative; z-index: 2;
+      filter: drop-shadow(0 8px 48px rgba(99,102,241,0.65)) drop-shadow(0 0 90px rgba(139,92,246,0.35));
+    }
+    .hero-img-glow {
+      position: absolute; inset: -24px; border-radius: 40px;
+      background: radial-gradient(ellipse at 50% 60%, rgba(99,102,241,0.45) 0%, rgba(139,92,246,0.2) 45%, transparent 72%);
+      z-index: 1; pointer-events: none;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    .hero-orbit {
+      position: absolute; inset: -12%; border-radius: 50%;
+      border: 1.5px solid rgba(99,102,241,0.4);
+      pointer-events: none; z-index: 3;
+      animation: orbitSpin 9s linear infinite;
+    }
+    .hero-orbit-2 {
+      position: absolute; inset: -22%; border-radius: 50%;
+      border: 1px solid rgba(6,182,212,0.28);
+      pointer-events: none; z-index: 3;
+      animation: orbitSpin 14s linear infinite reverse;
+    }
+    .hero-orbit-3 {
+      position: absolute; inset: -32%; border-radius: 50%;
+      border: 1px dashed rgba(139,92,246,0.18);
+      pointer-events: none; z-index: 0;
+      animation: orbitSpin 20s linear infinite;
+    }
+    @keyframes heroFloat {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.06); }
+    }
+    @keyframes orbitSpin {
+      from { transform: rotateX(70deg) rotateZ(0deg); }
+      to   { transform: rotateX(70deg) rotateZ(360deg); }
     }
     .hero-visual-card {
       position: absolute; background: var(--bg-glass);
@@ -351,7 +396,7 @@
       .hero-cta { justify-content: center; }
       .hero-stats { justify-content: center; }
       .hero-visual { margin-top: 40px; }
-      #hero-canvas { height: 380px; }
+      .hero-img-scene { max-width: 340px; }
     }
 
     /* =====================================================
@@ -1176,7 +1221,15 @@
 
         <!-- Right 3D Visual -->
         <div class="hero-visual">
-          <canvas id="hero-canvas"></canvas>
+          <div class="hero-img-scene" id="heroScene">
+            <div class="hero-img-wrap" id="heroWrap">
+              <div class="hero-img-glow"></div>
+              <img src="images/ai%20bot%20for%20claude.jpg" alt="AI Automation Bot" class="hero-bot-img" />
+            </div>
+            <div class="hero-orbit"></div>
+            <div class="hero-orbit-2"></div>
+            <div class="hero-orbit-3"></div>
+          </div>
 
           <div class="hero-visual-card card-1">
             <div class="card-1-inner">
@@ -2669,127 +2722,32 @@
       }
     });
 
-    /* ---- THREE.JS HERO 3D ---- */
-    try {
-      const canvas = document.getElementById('hero-canvas');
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
-      renderer.setClearColor(0x000000, 0);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, canvas.offsetWidth / canvas.offsetHeight, 0.1, 100);
-      camera.position.set(0, 0, 5);
-
-      // Lights
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-      scene.add(ambientLight);
-      const light1 = new THREE.DirectionalLight(0x6366f1, 2);
-      light1.position.set(5, 5, 5);
-      scene.add(light1);
-      const light2 = new THREE.DirectionalLight(0x8b5cf6, 1.5);
-      light2.position.set(-5, -3, 3);
-      scene.add(light2);
-      const light3 = new THREE.DirectionalLight(0x06b6d4, 1);
-      light3.position.set(0, 5, -5);
-      scene.add(light3);
-
-      // Central torus knot
-      const geo1 = new THREE.TorusKnotGeometry(1.2, 0.38, 150, 20);
-      const mat1 = new THREE.MeshPhysicalMaterial({
-        color: 0x6366f1,
-        metalness: 0.9,
-        roughness: 0.1,
-        reflectivity: 1,
-        wireframe: false,
+    /* ---- HERO IMAGE 3D TILT ---- */
+    (() => {
+      const scene = document.getElementById('heroScene');
+      const wrap  = document.getElementById('heroWrap');
+      if (!scene || !wrap) return;
+      let lerpX = 0, lerpY = 0, targetX = 0, targetY = 0, raf;
+      const MAX_TILT = 14;
+      scene.addEventListener('mousemove', (e) => {
+        const r  = scene.getBoundingClientRect();
+        const dx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+        const dy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+        targetX = -dy * MAX_TILT;
+        targetY =  dx * MAX_TILT;
+        wrap.style.animationPlayState = 'paused';
       });
-      const torusKnot = new THREE.Mesh(geo1, mat1);
-      scene.add(torusKnot);
-
-      // Wireframe overlay
-      const geo2 = new THREE.TorusKnotGeometry(1.25, 0.4, 80, 16);
-      const mat2 = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true, transparent: true, opacity: 0.15 });
-      const wireframe = new THREE.Mesh(geo2, mat2);
-      scene.add(wireframe);
-
-      // Floating particles
-      const particleGeo = new THREE.BufferGeometry();
-      const count = 200;
-      const positions = new Float32Array(count * 3);
-      for (let i = 0; i < count * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 10;
-      }
-      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const particleMat = new THREE.PointsMaterial({ color: 0x6366f1, size: 0.04, transparent: true, opacity: 0.6 });
-      const particles = new THREE.Points(particleGeo, particleMat);
-      scene.add(particles);
-
-      // Orbit ring
-      const ringGeo = new THREE.TorusGeometry(2.2, 0.03, 16, 100);
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.4 });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 4;
-      scene.add(ring);
-
-      // Second ring
-      const ring2 = new THREE.Mesh(
-        new THREE.TorusGeometry(1.8, 0.02, 16, 100),
-        new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.3 })
-      );
-      ring2.rotation.x = -Math.PI / 3;
-      ring2.rotation.y = Math.PI / 5;
-      scene.add(ring2);
-
-      // Mouse interaction
-      let mouseX = 0, mouseY = 0;
-      document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      scene.addEventListener('mouseleave', () => {
+        targetX = 0; targetY = 0;
+        wrap.style.animationPlayState = 'running';
       });
-
-      // Animation loop
-      let t = 0;
-      function animate() {
-        requestAnimationFrame(animate);
-        t += 0.005;
-
-        torusKnot.rotation.x += 0.005;
-        torusKnot.rotation.y += 0.008;
-        wireframe.rotation.x -= 0.003;
-        wireframe.rotation.y -= 0.005;
-        ring.rotation.z += 0.004;
-        ring2.rotation.z -= 0.003;
-        particles.rotation.y += 0.001;
-
-        // Mouse parallax
-        torusKnot.rotation.x += mouseY * 0.001;
-        torusKnot.rotation.y += mouseX * 0.001;
-
-        // Pulsing scale
-        const scale = 1 + Math.sin(t * 2) * 0.04;
-        torusKnot.scale.setScalar(scale);
-
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      // Resize handler
-      const resizeCanvas = () => {
-        const w = canvas.offsetWidth;
-        const h = canvas.offsetHeight || 520;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      };
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-
-    } catch (err) {
-      console.warn('Three.js unavailable:', err);
-      // Fallback: CSS 3D animation
-      const canvas = document.getElementById('hero-canvas');
-      canvas.style.background = 'radial-gradient(ellipse at center, rgba(99,102,241,0.2) 0%, transparent 70%)';
-    }
+      (function lerp() {
+        lerpX += (targetX - lerpX) * 0.1;
+        lerpY += (targetY - lerpY) * 0.1;
+        wrap.style.transform = `rotateX(${lerpX}deg) rotateY(${lerpY}deg)`;
+        requestAnimationFrame(lerp);
+      })();
+    })();
 
     /* ---- ACTIVE NAV ON SCROLL ---- */
     const sections = document.querySelectorAll('section[id]');
