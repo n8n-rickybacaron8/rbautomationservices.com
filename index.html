@@ -1451,6 +1451,33 @@
     .cw-send:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
     .cw-send svg { width: 17px; height: 17px; fill: #fff; }
 
+    /* Chat action buttons */
+    .cw-msg-content { display: flex; flex-direction: column; gap: 8px; max-width: 100%; }
+    .cw-action-btns { display: flex; flex-direction: column; gap: 6px; }
+    .cw-action-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 14px; border-radius: 12px;
+      font-size: 13px; font-weight: 600;
+      border: 1.5px solid rgba(99,102,241,0.28);
+      background: rgba(99,102,241,0.07);
+      color: var(--accent); cursor: pointer;
+      text-align: left; width: 100%;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    [data-theme="light"] .cw-action-btn { background: rgba(99,102,241,0.06); }
+    .cw-action-btn:hover {
+      background: rgba(99,102,241,0.15);
+      border-color: rgba(99,102,241,0.5);
+      transform: translateX(3px);
+    }
+    .cw-action-btn .cw-btn-icon {
+      width: 26px; height: 26px; border-radius: 8px;
+      background: var(--gradient-hero);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0;
+    }
+
     @media (max-width: 480px) {
       .cw-window { width: calc(100vw - 32px); right: 16px; bottom: 90px; }
       .cw-fab { right: 16px; bottom: 16px; }
@@ -3384,12 +3411,57 @@
       }
     }
 
+    function detectActions(text) {
+      const actions = [];
+      if (/calendly|book|appointment|schedule|free call|consultation|get started/i.test(text)) {
+        actions.push({ label: 'Make an Appointment', icon: '📅', type: 'book' });
+      }
+      if (/pricing|price|\$300|\$500|\$[0-9]|cost|package|plan|how much|affordable/i.test(text)) {
+        actions.push({ label: 'View Pricing', icon: '💰', type: 'pricing' });
+      }
+      return actions;
+    }
+
     function appendBot(text) {
+      const actions = detectActions(text);
       const div = document.createElement('div');
       div.className = 'cw-msg bot';
+
+      const btnsHtml = actions.length ? `
+        <div class="cw-action-btns">
+          ${actions.map(a => `
+            <button class="cw-action-btn" data-type="${a.type}">
+              <span class="cw-btn-icon">${a.icon}</span>${a.label}
+            </button>`).join('')}
+        </div>` : '';
+
       div.innerHTML = `
         <div class="cw-msg-avatar">🤖</div>
-        <div class="cw-msg-bubble">${linkify(text)}</div>`;
+        <div class="cw-msg-content">
+          <div class="cw-msg-bubble">${linkify(text)}</div>
+          ${btnsHtml}
+        </div>`;
+
+      // Wire up buttons
+      div.querySelectorAll('.cw-action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.type === 'book') {
+            // Open the Calendly booking modal
+            const calModal = document.getElementById('cal-modal');
+            const calIframe = document.getElementById('cal-iframe');
+            if (calIframe && !calIframe.src) calIframe.src = calIframe.dataset.src;
+            calModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          } else if (btn.dataset.type === 'pricing') {
+            // Close chat and scroll to pricing section
+            win.classList.remove('open');
+            fab.classList.remove('open');
+            isOpen = false;
+            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
       messages.appendChild(div);
       scrollToBottom();
     }
