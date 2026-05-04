@@ -190,7 +190,32 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 20px; font-weight: 700;
       text-decoration: none; color: var(--text-primary);
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo-img-wrap {
+      padding: 5px;
+      border-radius: 14px;
+      border: 1px solid rgba(6,182,212,0.35);
+      background: rgba(6,182,212,0.07);
+      box-shadow: 0 0 18px rgba(6,182,212,0.25), inset 0 0 12px rgba(6,182,212,0.05);
+      flex-shrink: 0;
+      display: flex; align-items: center;
+    }
+    .nav-logo-img-wrap img {
+      height: 46px; width: auto; display: block;
+      border-radius: 9px;
+    }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-logo-name {
+      font-size: 17px; font-weight: 800; letter-spacing: -0.3px;
+      background: linear-gradient(90deg, #f0f0ff 0%, #06b6d4 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-logo-sub {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--text-muted);
+      -webkit-text-fill-color: var(--text-muted);
     }
     .nav-logo-icon {
       width: 36px; height: 36px; border-radius: 10px;
@@ -1263,7 +1288,13 @@
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="#home" class="nav-logo">
-        <img src="Logo/RB%20Automation%20logo%20FInal.png" alt="RB Automation Services" style="height:40px;width:auto;display:block;" />
+        <div class="nav-logo-img-wrap">
+          <img src="Logo/RB%20Automation%20logo%20FInal.png" alt="RB Automation Services" />
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">RB Automation</span>
+          <span class="nav-logo-sub">Services</span>
+        </div>
       </a>
 
       <ul class="nav-links" id="nav-links">
