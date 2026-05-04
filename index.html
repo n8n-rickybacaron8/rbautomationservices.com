@@ -1122,6 +1122,126 @@
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 24px;
     }
+
+    /* =====================================================
+       BOOKING MODAL
+    ===================================================== */
+    .cal-modal {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cal-modal.open { opacity: 1; pointer-events: all; }
+
+    .cal-modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+    }
+
+    .cal-modal-box {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 320px 1fr;
+      width: 100%; max-width: 960px;
+      max-height: 90vh;
+      border-radius: 28px; overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+      transform: translateY(40px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .cal-modal.open .cal-modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .cal-modal-left {
+      background: linear-gradient(160deg, #0f0f1a 0%, #0a0a0f 100%);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 44px 36px;
+      display: flex; flex-direction: column; gap: 0;
+      overflow-y: auto;
+    }
+
+    .cal-modal-logo {
+      height: 36px; width: auto; margin-bottom: 32px; display: block;
+    }
+
+    .cal-modal-left h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px; font-weight: 800;
+      line-height: 1.25; margin-bottom: 14px;
+      color: #f0f0ff;
+    }
+
+    .cal-modal-left p {
+      font-size: 14px; color: #9898b8;
+      line-height: 1.7; margin-bottom: 32px;
+    }
+
+    .cal-modal-steps {
+      display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px;
+    }
+    .cal-modal-step {
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .cal-modal-step-icon {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+    }
+    .cal-modal-step-text strong {
+      display: block; font-size: 13px; font-weight: 700; color: #f0f0ff; margin-bottom: 2px;
+    }
+    .cal-modal-step-text span {
+      font-size: 12px; color: #9898b8; line-height: 1.5;
+    }
+
+    .cal-modal-badges {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .cal-modal-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; color: #9898b8;
+      padding: 5px 12px; border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .cal-modal-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+
+    .cal-modal-right {
+      background: #fff;
+      display: flex; flex-direction: column;
+      min-height: 580px;
+    }
+    .cal-modal-right iframe {
+      width: 100%; flex: 1; border: none; display: block; min-height: 580px;
+    }
+
+    .cal-modal-close {
+      position: absolute; top: 20px; right: 20px; z-index: 10;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #f0f0ff; font-size: 14px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; backdrop-filter: blur(8px);
+    }
+    .cal-modal-close:hover {
+      background: rgba(255,255,255,0.16); transform: scale(1.1);
+    }
+
+    @media (max-width: 720px) {
+      .cal-modal-box { grid-template-columns: 1fr; max-height: 95vh; border-radius: 20px; }
+      .cal-modal-left { display: none; }
+      .cal-modal-right { min-height: 85vh; }
+      .cal-modal-right iframe { min-height: 85vh; }
+      .cal-modal-close { top: 12px; right: 12px; background: rgba(0,0,0,0.5); }
+    }
   </style>
 </head>
 <body>
@@ -2595,6 +2715,66 @@
     </div>
   </footer>
 
+  <!-- ===================== BOOKING MODAL ===================== -->
+  <div class="cal-modal" id="cal-modal" role="dialog" aria-modal="true" aria-label="Schedule a free consultation">
+    <div class="cal-modal-backdrop" id="cal-modal-backdrop"></div>
+    <div class="cal-modal-box">
+      <button class="cal-modal-close" id="cal-modal-close" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Left info panel -->
+      <div class="cal-modal-left">
+        <img src="Logo/RB%20Automation%20logo%20FInal.png" alt="RB Automation Services" class="cal-modal-logo" />
+
+        <h3>Schedule Your Free Strategy Call</h3>
+        <p>30 minutes. No commitment. We'll map out exactly how automation and a professional website can grow your business — at no cost to you.</p>
+
+        <div class="cal-modal-steps">
+          <div class="cal-modal-step">
+            <div class="cal-modal-step-icon">💬</div>
+            <div class="cal-modal-step-text">
+              <strong>We discuss your business</strong>
+              <span>Tell us where you're spending the most time manually — we'll identify what to automate first.</span>
+            </div>
+          </div>
+          <div class="cal-modal-step">
+            <div class="cal-modal-step-icon">🗺️</div>
+            <div class="cal-modal-step-text">
+              <strong>We build a custom plan</strong>
+              <span>You'll leave with a clear roadmap of what we'll build, how long it takes, and exactly what it costs.</span>
+            </div>
+          </div>
+          <div class="cal-modal-step">
+            <div class="cal-modal-step-icon">✅</div>
+            <div class="cal-modal-step-text">
+              <strong>You only pay if satisfied</strong>
+              <span>We build it, you review it. If you're not happy, you don't pay. Simple as that.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cal-modal-badges">
+          <span class="cal-modal-badge"><span class="cal-modal-badge-dot"></span> Free call</span>
+          <span class="cal-modal-badge"><span class="cal-modal-badge-dot"></span> No upfront payment</span>
+          <span class="cal-modal-badge"><span class="cal-modal-badge-dot"></span> 30 minutes</span>
+          <span class="cal-modal-badge"><span class="cal-modal-badge-dot"></span> Zero risk</span>
+        </div>
+      </div>
+
+      <!-- Right: Calendly embed -->
+      <div class="cal-modal-right">
+        <iframe
+          id="cal-iframe"
+          src=""
+          data-src="https://calendly.com/bacaronricky84?embed_type=Inline&hide_gdpr_banner=1&primary_color=6366f1"
+          title="Schedule a free strategy call"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
   <!-- ===================== SCRIPTS ===================== -->
   <script>
   (function() {
@@ -2886,6 +3066,42 @@
     closeBtn.addEventListener('click', closeLightbox);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  })();
+
+  /* ---- BOOKING MODAL ---- */
+  (() => {
+    const modal      = document.getElementById('cal-modal');
+    const backdrop   = document.getElementById('cal-modal-backdrop');
+    const closeBtn   = document.getElementById('cal-modal-close');
+    const iframe     = document.getElementById('cal-iframe');
+    let iframeLoaded = false;
+
+    function openModal() {
+      // Lazy-load the Calendly iframe only on first open
+      if (!iframeLoaded) {
+        iframe.src = iframe.dataset.src;
+        iframeLoaded = true;
+      }
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Intercept all Calendly links — open modal instead of new tab
+    document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   })();
   </script>
 </body>
